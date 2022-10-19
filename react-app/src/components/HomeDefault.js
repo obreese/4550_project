@@ -1,4 +1,5 @@
 import { useState } from "react";
+import HomeBar from "./HomeBar";
 
 function Home() {
   const [searchResults, setSearchResults] = useState([]);
@@ -14,6 +15,9 @@ function Home() {
       <input type="search"></input>
       <button onClick={search}>Search</button>
       <div>{searchResults}</div>
+        <br/>
+        <HomeBar/>
+
     </div>
   );
 }
