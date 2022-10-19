@@ -1,5 +1,5 @@
-function Search(getSearchResults) {
-  return <div>{getSearchResults()}</div>;
+function Search() {
+  return <div>{}</div>;
 }
 
 export default Search;
