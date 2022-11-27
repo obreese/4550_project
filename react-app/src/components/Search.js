@@ -4,10 +4,10 @@ import { CLIENT_ID, CLIENT_SECRET } from "../constants";
 import { Buffer } from "buffer";
 import { URLS } from "../constants";
 
-async function Search() {
+function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const response = await fetch(URLS.GET_ACCESS_TOKEN, {
+  const response = fetch(URLS.GET_ACCESS_TOKEN, {
     method: "POST",
     headers: {
       Authorization:
@@ -15,8 +15,7 @@ async function Search() {
         new Buffer(CLIENT_ID + ":" + CLIENT_SECRET).toString("base64"),
     },
   });
-  const myJson = await response.json();
-  console.log(myJson);
+  console.log(response.json());
 
   return (
     <div>
