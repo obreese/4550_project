@@ -6,34 +6,31 @@ import LoginComponent from "./login/login";
 import SignUpComponent from "./login/signup";
 import NavigationSidebar from "./navigation";
 import React from "react";
-import PublicProfileComponent from "./profile/public-profile";
-import PrivateProfileComponent from "./profile/private-profile";
+import ProfileComponent from "./profile/profile";
 import LogoutComponent from "./login/logout";
-import {timeConverter} from "./time";
+import MusicDetailedComponent from "./music/music-detailed"
 
 function App() {
     let location = useLocation().pathname.split("/");
     if (location.length > 1 && location[1] === "") {
         location = "home"
-    } else if (location.length > 1 && location[1] === "myprofile") {
-        location = "myprofile"
+    } else if ((location.length === 3 && location[1] === 'profile' && (location[2] === 'followers' || location[2] === 'following' || location[2] === ''))) {
+        location = "profile"
     } else {
         location = location.pop()
     }
-    timeConverter(1668974426)
-
     return (
         <div className="row">
-            <NavigationSidebar active={location}/>
+            <NavigationSidebar active={location} loggedIn={false}/>
             <div className={"col-10 col-xs-10 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto"}>
                 <Routes>
                     <Route path="/" element={<HomeComponent/>}/>
                     <Route path="/home" element={<HomeComponent/>}/>
                     <Route path="/search/*" element={<HomeComponent/>}/>
-                    <Route path="/myprofile/*" element={<PrivateProfileComponent/>}/>
-                    <Route path="/profile/*" element={<PublicProfileComponent/>}/>
+                    <Route path="/details/*" element={<MusicDetailedComponent/>}/>
+                    <Route path="/profile/*" element={<ProfileComponent loggedIn={false}/>}/>
                     <Route path="/login" element={<LoginComponent/>}/>
-                    <Route path="/signup" element={<SignUpComponent/>}/>
+                    <Route path="/register" element={<SignUpComponent/>}/>
                     <Route path="/logout" element={<LogoutComponent/>}/>
                 </Routes>
             </div>

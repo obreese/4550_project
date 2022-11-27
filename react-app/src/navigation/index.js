@@ -6,11 +6,11 @@ import { FaUserCircle } from 'react-icons/fa'
 import {Link} from "react-router-dom";
 
 
-const NavigationSidebar = ({active = "home"}) => {
+const NavigationSidebar = ({active = "home", loggedIn = false}) => {
     return (
         <div className="list-group col-2">
             <Link to="/" className="list-group-item">
-                <img src={"images/logo-1.png"} className={"logo"}/>
+                <img src={"/images/logo-1.png"} className={"logo"}/>
             </Link>
             <Link
                 to="/"
@@ -20,13 +20,13 @@ const NavigationSidebar = ({active = "home"}) => {
                 <AiFillHome/><p className="d-none d-md-none d-lg-inline"> Home</p>
             </Link>
             <Link
-                to="/myprofile"
+                to="/profile"
                 className={`list-group-item
-                    ${active === "myprofile" ? "active" : ""}`}
+                    ${active === "profile" ? "active" : ""}`}
             >
                 <FaUserCircle/><p className="mt-3 d-none d-md-none d-lg-inline"> Profile</p>
             </Link>
-            <User loggedIn={true}/>
+            <User loggedIn={loggedIn}/>
         </div>
     );
 };

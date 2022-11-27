@@ -11,22 +11,22 @@ const SignUpComponent = () => {
                     <div className="row">
                     <div className="col">
                         <label htmlFor="fname-input">First Name</label>
-                        <input className="form-control rounded-pill ps-3" name="fname-input" type="text"></input>
+                        <input className="form-control rounded-pill ps-3" name="fname-input" type="text" placeholder="John"></input>
                     </div>
                         <div className="col">
                         <label htmlFor="lname-input">Last Name</label>
-                        <input className="form-control rounded-pill ps-3 mb-3" name="lname-input" type="text"></input>
+                        <input className="form-control rounded-pill ps-3 mb-3" name="lname-input" type="text" placeholder="Appleseed"></input>
                     </div>
                     </div>
                     <label htmlFor="email-input">Email</label>
                     <input className="form-control rounded-pill ps-3 mb-3" name="email-input" type="email"
                            placeholder="artist@music.com"></input>
                     <label htmlFor="user-input">Username</label>
-                    <input className="form-control rounded-pill ps-3 mb-3" name="user-input" type="text"></input>
+                    <input className="form-control rounded-pill ps-3 mb-3" name="user-input" type="text" placeholder="japple"></input>
                     <label htmlFor="pass-input">Password</label>
-                    <input className="form-control rounded-pill ps-3" name="pass-input" type="password"></input>
+                    <input className="form-control rounded-pill ps-3" name="pass-input" type="password" placeholder="password"></input>
                     <label htmlFor="pass2-input">Confirm Password</label>
-                    <input className="form-control rounded-pill ps-3" name="pass2-input" type="password"></input>
+                    <input className="form-control rounded-pill ps-3" name="pass2-input" type="password" placeholder="password"></input>
                 </div>
             </div>
             <ul className="nav nav-pills mb-2 p-3">

@@ -10,15 +10,15 @@ const ProfileStats = ({profile, myprofile=false}) => {
             <ul className="nav nav-pills mb-2">
                 <li className={"list-group-item"}>
                     <Link className={`nav-link p-1 ${location === "posts" ? "active" : ""}`}
-                          to={myprofile ? "/myprofile" : "/profile/" + profile.username}>{profile.posts} {profile.posts === 1 ? "Post" : "Posts"}</Link>
+                          to={myprofile ? "/profile" : "/profile/" + profile.username}>{profile.posts} {profile.posts === 1 ? "Post" : "Posts"}</Link>
                 </li>
                 <li className={"list-group-item"}>
                     <Link className={`nav-link p-1 ${location === "followers" ? "active" : ""}`}
-                          to={myprofile ? "/myprofile/followers" : "/profile/" + profile.username + "/followers"}>{profile.followers} Followers</Link>
+                          to={myprofile ? "/profile/followers" : "/profile/" + profile.username + "/followers"}>{profile.followers} Followers</Link>
                 </li>
                 <li className={"list-group-item"}>
                     <Link className={`nav-link p-1 ${location === "following" ? "active" : ""}`}
-                          to={myprofile ? "/myprofile/following" : "/profile/" + profile.username + "/following"}>{profile.following} Following</Link>
+                          to={myprofile ? "/profile/following" : "/profile/" + profile.username + "/following"}>{profile.following} Following</Link>
                 </li>
             </ul>
             <ContentList arr={profile.arr}/>
