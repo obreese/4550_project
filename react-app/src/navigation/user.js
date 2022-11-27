@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import {Link} from "react-router-dom";
 
-const AvatarUser = ({loggedIn = false}) => {
+const User = ({loggedIn = false}) => {
 
     return (
         <Link to={loggedIn ? "/logout" : "/login"} className="list-group-item">
@@ -18,4 +18,4 @@ const AvatarUser = ({loggedIn = false}) => {
         </Link>
     );
 };
-export default AvatarUser;
+export default User;

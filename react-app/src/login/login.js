@@ -1,7 +1,5 @@
 import React from "react";
-import NavigationSidebar from "../navigation";
 import  "react-icons/bi/index";
-import PostList from "../posts/post-list"
 import "./index.css"
 import {Link} from "react-router-dom";
 

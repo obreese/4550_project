@@ -1,8 +1,6 @@
 import React from "react";
-import NavigationSidebar from "../navigation";
-import "react-icons/bi/index";
-import PostList from "../posts/post-list"
-import {Link, useLocation} from "react-router-dom";
+import {Link} from "react-router-dom";
+import ProfileStats from "./profile-stats";
 
 const PrivateProfileComponent = ({
                                      profile = {
@@ -11,30 +9,10 @@ const PrivateProfileComponent = ({
                                          "username": "johnnyh",
                                          "followers": "100",
                                          "following": "99",
-                                         "posts": [{
-                                             "_id": 1234,
-                                             "user": "Me",
-                                             "userName": "user",
-                                             "time": "2h",
-                                             "type": "song",
-                                             "image": "album-cover.jpeg",
-                                             "link": "spotify.com",
-                                             "body": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English."
-                                         }, {
-                                             "_id": 1235,
-                                             "user": "Me",
-                                             "userName": "user",
-                                             "time": "2h",
-                                             "type": "song",
-                                             "image": "album-cover.jpeg",
-                                             "link": "spotify.com",
-                                             "body": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English."
-                                         }
-                                         ]
+                                         "posts": "44",
+                                         "arr": []
                                      }
                                  }) => {
-    var location = useLocation().pathname.split("/").pop();
-    if (location !== "following" && location !== "followers") location = "posts"
     return (
         <div className={"border rounded"}>
             <div className="row">
@@ -69,22 +47,7 @@ const PrivateProfileComponent = ({
                             </div>
                         </div>
                     </div>
-
-                    <ul className="nav nav-pills mb-2">
-                        <li className={"list-group-item"}>
-                            <Link className={`nav-link p-1 ${location === "posts" ? "active" : ""}`}
-                                  to={"/myprofile"}>{profile.posts.length} {profile.posts.length === 1 ? "Post" : "Posts"}</Link>
-                        </li>
-                        <li className={"list-group-item"}>
-                            <Link className={`nav-link p-1 ${location === "followers" ? "active" : ""}`}
-                                  to={"/myprofile/followers"}>{profile.followers} Followers</Link>
-                        </li>
-                        <li className={"list-group-item"}>
-                            <Link className={`nav-link p-1 ${location === "following" ? "active" : ""}`}
-                                  to={"/myprofile/following"}>{profile.following} Following</Link>
-                        </li>
-                    </ul>
-                    <PostList postList={profile.posts}/>
+                    <ProfileStats profile={profile} myprofile={true}/>
                 </div>
             </div>
         </div>
