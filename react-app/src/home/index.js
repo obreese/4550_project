@@ -1,13 +1,15 @@
 import React from "react";
 import NavigationSidebar from "../navigation";
 import  "react-icons/bi/index";
+import PostList from "../posts/post-list"
 
 const HomeComponent = () => {
     return (
-        <div className="col-6">
-            <input placeholder="Search Posts and Music"
+        <>
+            <input placeholder="Search People and Music"
                    className="form-control rounded-pill ps-3"/>
-        </div>
+            <PostList/>
+        </>
     );
 };
 export default HomeComponent;

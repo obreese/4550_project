@@ -1,0 +1,12 @@
+.music-item {
+    background-color: var(--green) !important;
+    color: white !important;
+}
+
+.music-item:hover {
+    color: white !important;
+}
+
+.hover {
+
+}

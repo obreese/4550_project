@@ -8,6 +8,10 @@
     border-color: var(--green) !important;
 }
 
+.active:hover {
+    color: white !important;
+}
+
 a:hover {
     color: var(--green) !important;
 }
