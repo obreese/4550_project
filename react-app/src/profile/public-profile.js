@@ -8,7 +8,8 @@ const PublicProfileComponent = ({
                                         "username": "johnnyh",
                                         "followers": "100",
                                         "following": "99",
-                                        "posts": []
+                                        "posts": 44,
+                                        "arr": []
                                     }
                                 }) => {
     return (
