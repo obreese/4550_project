@@ -1,0 +1,21 @@
+.music-item {
+    background-color: var(--green) !important;
+    color: white !important;
+}
+
+.music-item:hover {
+    color: white !important;
+}
+
+.music-link-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+}
+
+.music-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

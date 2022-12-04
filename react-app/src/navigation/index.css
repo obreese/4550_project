@@ -1,0 +1,26 @@
+.logo {
+    width: 40px;
+    height: 40px;
+}
+
+.active {
+    background-color: var(--green) !important;
+    border-color: var(--green) !important;
+}
+
+.active:hover {
+    color: white !important;
+}
+
+a:hover {
+    color: var(--green) !important;
+}
+
+.avatar {
+    width: 40px !important;
+    height: 40px;
+    border-radius: 100%;
+    border-color: var(--green);
+    border-style: solid;
+    border-width: 2px;
+}
