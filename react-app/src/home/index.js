@@ -1,9 +1,10 @@
-import React from "react";
-import NavigationSidebar from "../navigation";
+import React, { useState } from "react";
 import  "react-icons/bi/index";
-import ContentList from "../list"
+import ContentList from "../list";
+import { findAllMusic } from "../music/music-service"
 
-const HomeComponent = ({content = [{
+
+const HomeComponent = ({contentIntial = [{
     "type": "post",
     "_id": 1234,
     "fname": "Me",
@@ -37,11 +38,51 @@ const HomeComponent = ({content = [{
     "image": "album-cover.jpeg",
     "music_id": "456"
 }]}) => {
+    const [searchInput, setSearchInput] = useState("");
+    const [content, setContent] = useState(contentIntial); // todo should change this is a proof of concept
+
+
+    const searchInputChange = (newValue) => {
+    setSearchInput(newValue.target.value);
+    };
+
+    const searchOnClick = async () => {
+        const musicDataList = await findAllMusic(searchInput); // await and async should change when we use thunks
+
+        console.log(musicDataList)
+        const newItems = musicDataList.map(musicData => { // todo whats the difference between music id and id?
+            return {
+                type: "music",
+                _id: musicData.id,
+                music_type: musicData.type === 'track' ? "song" : musicData.type,
+                song: musicData.name,
+                album: musicData.album.name,
+                artist: musicData.artists[0].name, // todo allow multiple
+                image: musicData.album.images[0].url,
+                music_id: musicData.id, 
+            }
+        });
+        console.log(newItems)
+        setContent(newItems);
+    }
+
     return (
         <>
             <input placeholder="Search People and Music"
-                   className="form-control rounded-pill ps-3"/>
+                   className="form-control rounded-pill ps-3"
+                   type="search"
+                   onChange={searchInputChange}/>
+            <button onClick={searchOnClick}>test search</button>
             <ContentList arr={content}/>
+            {/* <ul className="list-group">
+                {
+                    content && content.map((musicItem) =>
+                        <li key={musicItem.name} className="list-group-item">
+                            {musicItem.name}
+                        </li>
+                    )
+                }
+            </ul> */}
         </>
     );
 };

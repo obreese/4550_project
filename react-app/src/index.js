@@ -8,7 +8,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "font-awesome/css/font-awesome.css"
 import "react-icons/bi"
-import NavigationSidebar from "./navigation";
 import {Route, Routes} from "react-router";
 import HomeComponent from "./home";
 import {BrowserRouter} from "react-router-dom";

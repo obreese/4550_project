@@ -28,7 +28,7 @@ const MusicItem = ({music}) => {
                     }
                 </div>
                 <div className="col-3">
-                    <img className="p-2" alt="album cover" height={100} src={`/images/${music.image}`}/>
+                    <img className="p-2" alt="album cover" height={100} src={music.image}/>
                 </div>
             </Link>
         </li>
