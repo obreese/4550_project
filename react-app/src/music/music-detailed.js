@@ -5,20 +5,11 @@ import {TiArrowForward} from "react-icons/ti"
 import ContentList from "../list";
 import CreatePostItem from "../posts/create-post-item"
 import {Link} from "react-router-dom";
+import {music_detailed_json} from "../json_examples";
 
 
 const MusicDetailedComponent = ({
-                                    music = {
-                                        "type": "music-detailed",
-                                        "_id": 1236,
-                                        "music-type": "song",
-                                        "song": "my really long song name that is a song. again my really long song name that is a song",
-                                        "album": "my really long album name that is a album. again my really long album name that is a album",
-                                        "artist": "my really long artist name that is a artist. again my really long artist name that is a artist",
-                                        "image": "album-cover.jpeg",
-                                        "link": "http://www.spotify.com",
-                                        "posts": []
-                                    },
+                                    music = music_detailed_json,
                                 loggedIn = true}) => {
 
     return (

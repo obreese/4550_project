@@ -11,7 +11,7 @@ const PostItem = ({post}) => {
                     <div className="row">
                         <div className="col">
                             {post.fname + " " + post.lname} <p className={"d-inline text-secondary"}>
-                            <Link className="text-secondary" to={"/profile/" + post.username}>{'@' + post.username}</Link> - {timeConverter(post.time)}</p>
+                            <Link className="text-secondary" to={"/profile/" + post.user_id}>{'@' + post.username}</Link> - {timeConverter(post.time)}</p>
                         </div>
                     </div>
                     <div className="row p-2">

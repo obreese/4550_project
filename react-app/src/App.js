@@ -21,14 +21,14 @@ function App() {
     }
     return (
         <div className="row">
-            <NavigationSidebar active={location} loggedIn={false}/>
+            <NavigationSidebar active={location} loggedIn={true}/>
             <div className={"col-10 col-xs-10 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto"}>
                 <Routes>
                     <Route path="/" element={<HomeComponent/>}/>
                     <Route path="/home" element={<HomeComponent/>}/>
                     <Route path="/search/*" element={<HomeComponent/>}/>
                     <Route path="/details/*" element={<MusicDetailedComponent/>}/>
-                    <Route path="/profile/*" element={<ProfileComponent loggedIn={false}/>}/>
+                    <Route path="/profile/*" element={<ProfileComponent loggedIn={true}/>}/>
                     <Route path="/login" element={<LoginComponent/>}/>
                     <Route path="/register" element={<SignUpComponent/>}/>
                     <Route path="/logout" element={<LogoutComponent/>}/>

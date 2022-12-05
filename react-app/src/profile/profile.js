@@ -1,7 +1,7 @@
 import React from "react";
 import {useLocation} from "react-router-dom";
 import PublicProfileComponent from "./public-profile";
-import PrivateProfileComponent from "./private-profile";
+import EditableProfileComponent from "./editable-profile";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
 
@@ -22,7 +22,7 @@ const ProfileComponent = ({loggedIn = false}) => {
     })
 
     return (
-        myprofile ? <PrivateProfileComponent/> : <PublicProfileComponent/>
+        myprofile ? <EditableProfileComponent/> : <PublicProfileComponent/>
     );
 };
 export default ProfileComponent;
