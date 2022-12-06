@@ -17,20 +17,7 @@ const HomeComponent = ({contentInitial = []}) => {
         const musicDataList = await findAllMusic(searchInput); // await and async should change when we use thunks
 
         console.log(musicDataList)
-        const newItems = musicDataList.map(musicData => { // todo whats the difference between music id and id?
-            return {
-                type: "music",
-                _id: musicData.id,
-                music_type: musicData.type === 'track' ? "song" : musicData.type,
-                song: musicData.name,
-                album: musicData.album.name,
-                artist: musicData.artists[0].name, // todo allow multiple
-                image: musicData.album.images[0].url,
-                music_id: musicData.id, 
-            }
-        });
-        console.log(newItems)
-        setContent(newItems);
+        setContent(musicDataList);
     }
 
     const handleKeyDown = (event) => {
@@ -59,7 +46,7 @@ const HomeComponent = ({contentInitial = []}) => {
         <>
             <input placeholder="Search People and Music"
                 className="form-control rounded-pill ps-3"
-                onKeyDown={handleKeyDown} // todo make sure x works
+                onKeyDown={handleKeyDown} // todo make sure x works and fix overflow error
                 type="search"/>
             <ContentList arr={content}/>
         </>

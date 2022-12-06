@@ -1,6 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import axios from 'axios';
 import MusicController from './music/music-controller.js'
 import { spotifyAuth } from './spotify_auth/spotify-auth-controller.js';
 
@@ -9,7 +8,6 @@ app.use(cors());
 app.use(express.json());
 
 await spotifyAuth();
-
 
 MusicController(app);
 
