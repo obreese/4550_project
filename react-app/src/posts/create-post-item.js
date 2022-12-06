@@ -12,23 +12,24 @@ const CreatePostItem = ({music}) => {
     }
 
     return (
-            <>
-                <div className="col">
-                    <div className="row">
-                        <textarea onKeyDown={handleKeyDown} onChange={handleKeyDown} className="form-control shadow-none" placeholder="New post..."/>
-                    </div>
-                    <div className="row p-2">
-                        <div className="col3">
-                        <button className="btn active text-white">Post</button>
-                        </div>
-                    </div>
 
+        <>
+            <div className="col">
+                <div className="row">
+                    <textarea onKeyDown={handleKeyDown} onChange={handleKeyDown} className="form-control shadow-none"
+                              placeholder="New post..."/>
                 </div>
-                <div
-                    className="col-5 col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-4 col-xxl-4 float-right d-inline-flex align-items-center">
-                    <MusicLinkItem music={music}/>
+                <div className="row p-2">
+                    <div className="col3">
+                        <button className="btn active text-white">Post</button>
+                    </div>
                 </div>
-</>
+            </div>
+            <div
+                className="col-5 col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-4 col-xxl-4 float-right d-inline-flex align-items-center">
+                <MusicLinkItem music={music}/>
+            </div>
+        </>
     );
 };
 export default CreatePostItem;

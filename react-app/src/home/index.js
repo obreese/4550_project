@@ -3,50 +3,17 @@ import  "react-icons/bi/index";
 import ContentList from "../list";
 import { findAllMusic } from "../music/music-service"
 
+import {musics_json, posts_json, profile_items_json} from "../json_examples";
+import {createSearchParams, useLocation, useNavigate} from "react-router-dom";
 
-const HomeComponent = ({contentIntial = [{
-    "type": "post",
-    "_id": 1234,
-    "fname": "Me",
-    "lname": "Smith",
-    "username": "user",
-    "time": 1669582106,
-    "music": {
-        "type": "music",
-        "_id": 1236,
-        "music_type": "song",
-        "song": "my really long song name that is a song",
-        "album": "my really long album name that is a album",
-        "artist": "my really long artist name that is a artist",
-        "image": "album-cover.jpeg",
-        "music_id": "456"
-    },
-    "body": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English."
-},{
-    "type": "profile",
-    "_id": 1235,
-    "fname": "Me",
-    "lname": "Smith",
-    "username": "user"
-},{
-    "type": "music",
-    "_id": 1236,
-    "music_type": "song",
-    "song": "my really long song name that is a song. again my really long song name that is a song",
-    "album": "my really long album name that is a album. again my really long album name that is a album",
-    "artist": "my really long artist name that is a artist. again my really long artist name that is a artist",
-    "image": "album-cover.jpeg",
-    "music_id": "456"
-}]}) => {
-    const [searchInput, setSearchInput] = useState("");
-    const [content, setContent] = useState(contentIntial); // todo should change this is a proof of concept
+const HomeComponent = ({contentInitial = []}) => {
+    // let search = useLocation().pathname.split("/").indexOf("search") > -1
+    // let arr_e = musics_json.concat(profile_items_json)
+    const navigate = useNavigate()
+    // const [searchInput, setSearchInput] = useState("");
+    const [content, setContent] = useState(posts_json); // todo should change this is a proof of concept
 
-
-    const searchInputChange = (newValue) => {
-    setSearchInput(newValue.target.value);
-    };
-
-    const searchOnClick = async () => {
+    const getSearchResults = async (searchInput) => {
         const musicDataList = await findAllMusic(searchInput); // await and async should change when we use thunks
 
         console.log(musicDataList)
@@ -66,24 +33,37 @@ const HomeComponent = ({contentIntial = [{
         setContent(newItems);
     }
 
+    const handleKeyDown = (event) => {
+        const searchTerm = event.target.value;
+        if (event.key === 'Enter') {
+            if (searchTerm === "") {
+                navigate({
+                    pathname: '/',
+                });
+                
+                setContent(posts_json)
+            }
+            else {
+                navigate({
+                    pathname: '/search',
+                    search: `?${createSearchParams({"search": searchTerm})}`, // todo do we really need this
+                });
+
+                getSearchResults(searchTerm)
+            }
+            
+        }
+    }
+
     return (
         <>
             <input placeholder="Search People and Music"
-                   className="form-control rounded-pill ps-3"
-                   type="search"
-                   onChange={searchInputChange}/>
-            <button onClick={searchOnClick}>test search</button>
+                className="form-control rounded-pill ps-3"
+                onKeyDown={handleKeyDown} // todo make sure x works
+                type="search"/>
             <ContentList arr={content}/>
-            {/* <ul className="list-group">
-                {
-                    content && content.map((musicItem) =>
-                        <li key={musicItem.name} className="list-group-item">
-                            {musicItem.name}
-                        </li>
-                    )
-                }
-            </ul> */}
         </>
     );
 };
+
 export default HomeComponent;
