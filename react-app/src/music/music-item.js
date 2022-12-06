@@ -8,7 +8,7 @@ const MusicItem = ({music}) => {
 
     return (
         <li className="list-group-item">
-            <Link to={"/details/" + music.music_id} className="row music-item rounded text-decoration-none">
+            <Link to={`/details?musicId=${music._id}&type=${music.music_type}`} className="row music-item rounded text-decoration-none">
                 <div className="col-2 d-inline-flex align-items-center">
                     {renderIcon(music.music_type)}
                 </div>
