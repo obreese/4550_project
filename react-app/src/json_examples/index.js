@@ -133,6 +133,7 @@ export const editable_profile_json = {
     /search/*
 */
 
+// todo deal with types for these (enum)
 export const musics_json = [{
     "type": "music",
     "_id": 2236,
