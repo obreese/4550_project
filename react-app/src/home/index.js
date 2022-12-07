@@ -16,7 +16,6 @@ const HomeComponent = ({contentInitial = []}) => {
     const getSearchResults = async (searchInput) => {
         const musicDataList = await findAllMusic(searchInput); // await and async should change when we use thunks
 
-        console.log(musicDataList)
         setContent(musicDataList);
     }
 

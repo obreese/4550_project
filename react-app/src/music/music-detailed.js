@@ -50,7 +50,7 @@ const MusicDetailedComponent = ({
                     }
                 </div>
                 <div className="col-3">
-                    <img className="p-2" alt="album cover" height={100} src={`/images/${music.image}`}/>
+                    <img className="p-2" alt="album cover" height={100} src={`${music.image}`}/>
                 </div>
                 <div className="col-2 d-inline-flex align-items-center">
                     <a href={music.link} target="_blank" rel="noopener noreferrer"

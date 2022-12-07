@@ -21,7 +21,6 @@ export const spotifyAuth = async () => {
   
   let res = await fetch("https://accounts.spotify.com/api/token?grant_type=client_credentials", requestOptions);
   res = await res.json();
-  console.log(res)
 
   // let myHeaders = new Headers();
   // myHeaders.append("Authorization", `Basic ${client_id}:${client_secret}`);

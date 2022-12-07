@@ -3,7 +3,7 @@ import axios from 'axios';
 const SPOTIFY_BASE_URL = 'https://api.spotify.com/v1';
 
 const _formatMusicDataList = (songsDataList, albumsDataList, artistsDataList) => {
-  const formattedSongsList = Array.from(songsDataList.tracks.items.map(musicData => { // todo whats the difference between music id and id?
+  const formattedSongsList = Array.from(songsDataList.tracks.items.map(musicData => { 
     return {
         type: "music",
         _id: musicData.id,
@@ -14,7 +14,7 @@ const _formatMusicDataList = (songsDataList, albumsDataList, artistsDataList) =>
         image: musicData.album.images[0].url,
     }
   }).values()).slice(0, 5);
-  const formattedAlbumsList = Array.from(albumsDataList.albums.items.map(musicData => { // todo whats the difference between music id and id?
+  const formattedAlbumsList = Array.from(albumsDataList.albums.items.map(musicData => { 
     return {
         type: "music",
         _id: musicData.id,
@@ -24,14 +24,14 @@ const _formatMusicDataList = (songsDataList, albumsDataList, artistsDataList) =>
         image: musicData.images[0].url,
     }
   }).values()).slice(0, 5);
-  const formattedArtistsList = Array.from(artistsDataList.artists.items.map(musicData => { // todo whats the difference between music id and id?
+  const formattedArtistsList = Array.from(artistsDataList.artists.items.map(musicData => {
     return {
         type: "music",
         _id: musicData.id,
         music_type: "artist",
         song: musicData.name,
-        artist: musicData.name, // todo allow multiple
-        // image: musicData.images[0].url, // todo does this exist?
+        artist: musicData.name, 
+        image: musicData.images[0]?.url,
     }
   }).values()).slice(0, 5);
 
@@ -43,7 +43,6 @@ const _formatMusicDetails = (musicData, type) => {
     type: "music_detailed",
     _id: musicData.id,
     music_type: type,
-    
 }
 
   if (type === 'artist') {
@@ -90,7 +89,7 @@ const findSingleMusicDetails = async (req, res) => {
 
   let response = await axios.get(`${SPOTIFY_BASE_URL}/${type}s/${musicId}`);
    
-  res.send(_formatMusicDetails(response.data));
+  res.send(_formatMusicDetails(response.data, type));
 }
 
 export default (app) => {
