@@ -19,7 +19,6 @@ const MusicDetailedComponent = ({
     const urlParams = new URLSearchParams(queryString);
  
     const updateMusicDetails = async () => {
-        console.log(urlParams.get('musicId'), urlParams.get("type"))
         musicDetails = await findMusicDetails(urlParams.get('musicId'), urlParams.get("type"));
         setMusic(musicDetails);
     }

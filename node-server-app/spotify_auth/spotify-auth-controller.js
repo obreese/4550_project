@@ -14,55 +14,16 @@ export const spotifyAuth = async () => {
   urlencoded.append("grant_type", "client_credentials");
 
   const requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  redirect: 'follow'
+    method: 'POST',
+    headers: myHeaders,
+    redirect: 'follow'
   }
   
   let res = await fetch("https://accounts.spotify.com/api/token?grant_type=client_credentials", requestOptions);
   res = await res.json();
 
-  // let myHeaders = new Headers();
-  // myHeaders.append("Authorization", `Basic ${client_id}:${client_secret}`);
-  // myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-
-
-  // // let myHeaders = {
-  // //   "Authorization": `Basic ${client_id}:${client_secret}`,
-  // //   "Content-Type": "application/x-www-form-urlencoded",
-  // // }
-
-  // var urlencoded = new URLSearchParams();
-  // urlencoded.append("grant_type", "client_credentials");
-
-  // const requestOptions = {
-  // method: "POST",
-  // headers: myHeaders,
-  // body: urlencoded,
-  // redirect: 'follow'
-  // }
-  
-  // let res = await fetch("https://accounts.spotify.com/api/token", requestOptions);
-  // res = await res.json();
-  // console.log(res)
-  // return res.access_token; 
-
-  // axios.post(`https://accounts.spotify.com/api/token`, requestOptions)
-
-  // axios.post(`https://accounts.spotify.com/api/token`, {
-  //   headers: {
-  //     "Authorization": "Basic " + client_id + ":" + client_secret,
-  //     "Content-Type": "application/x-www-form-urlencoded",
-  //   },
-  //   form: {
-  //       grant_type: "client_credentials",
-  //   },
-  //   json: true,
-  // })
-
   let authToken = res.access_token;
   axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`
-  // axios.defaults.headers.common['Content-Type'] = `application/json`
   axios.defaults.headers.common['Accept-Encoding'] = `application/json`
 
 }

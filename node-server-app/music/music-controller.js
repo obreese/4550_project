@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { spotifyAuth } from '../spotify_auth/spotify-auth-controller.js';
 
 const SPOTIFY_BASE_URL = 'https://api.spotify.com/v1';
 
@@ -10,7 +11,7 @@ const _formatMusicDataList = (songsDataList, albumsDataList, artistsDataList) =>
         music_type: "song",
         song: musicData.name,
         album: musicData.album.name,
-        artist: musicData.artists[0].name, // todo allow multiple
+        artist: musicData.artists.map(artist => artist.name).join(', '),
         image: musicData.album.images[0].url,
     }
   }).values()).slice(0, 5);
@@ -20,7 +21,7 @@ const _formatMusicDataList = (songsDataList, albumsDataList, artistsDataList) =>
         _id: musicData.id,
         music_type: "album",
         album: musicData.name,
-        artist: musicData.artists[0].name, // todo allow multiple
+        artist: musicData.artists.map(artist => artist.name).join(', '),
         image: musicData.images[0].url,
     }
   }).values()).slice(0, 5);
@@ -76,6 +77,16 @@ const findAllMusic = async (req, res) => {
     axios.get(`${SPOTIFY_BASE_URL}/search?q=${searchTerm}&type=album`),
     axios.get(`${SPOTIFY_BASE_URL}/search?q=${searchTerm}&type=artist`),
   ]);
+
+  responses.map(response => {
+    if (response.data?.error?.status === 401 && response.data?.error?.message === "The access token expired") {
+      spotifyAuth().then(() => {
+        findAllMusic(req, res);
+        return
+      });
+    }
+  })
+
   const songsDataList = await responses[0].data;
   const albumsDataList = await responses[1].data;
   const artistsDataList = await responses[2].data;
@@ -89,6 +100,13 @@ const findSingleMusicDetails = async (req, res) => {
 
   let response = await axios.get(`${SPOTIFY_BASE_URL}/${type}s/${musicId}`);
    
+  if (response.data?.error?.status === 401 && response.data?.error?.message === "The access token expired") {
+    spotifyAuth().then(() => {
+      findSingleMusicDetails(req, res);
+      return
+    });
+  }
+
   res.send(_formatMusicDetails(response.data, type));
 }
 
