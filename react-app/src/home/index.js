@@ -3,6 +3,7 @@ import  "react-icons/bi/index";
 import ContentList from "../list";
 import {musics_json, posts_json, profile_items_json} from "../json_examples";
 import {createSearchParams, useLocation, useNavigate} from "react-router-dom";
+import './index.css';
 
 // TODO get posts from user
 
@@ -20,6 +21,7 @@ const HomeComponent = ({contentInitial = []}) => {
 
     return (
         <>
+            <img src="/images/logo-2.png" className="big-logo pb-3"/>
             <input placeholder="Search People and Music"
                 className="form-control rounded-pill ps-3"
                 onKeyDown={handleKeyDown}

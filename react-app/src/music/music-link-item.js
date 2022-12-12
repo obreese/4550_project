@@ -13,7 +13,10 @@ const MusicLinkItem = ({music}) => {
                     {renderIcon(music.music_type)}
                 </div>
                 <div className="col">
-                    <img className="img-fluid" alt="album cover" height={100} src={`${music.image}`}/>
+                    <img className="img-fluid" alt="album cover"
+                         height={100} src={
+                             music.image ? music.image : '/images/default-artist.jpg'
+                         }/>
                 </div>
                 </div>
                 <div className="row">

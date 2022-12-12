@@ -62,14 +62,6 @@ export const posts_json = [{
     "body": "It is a long established fact"
 }]
 
-/*
-    /search/*
-    /profile/followers
-    /profile/id/followers
-    /profile/following
-    /profile/id/following
- */
-
 export const profile_items_json = [{
     "type": "profile_item",
     "_id": 42351,
@@ -95,9 +87,6 @@ export const profile_items_json = [{
 
 let profiles_and_posts = profile_items_json.concat(posts_json)
 
-/*
-    /profile/*
- */
 
 export const profile_json = {
     "type": "profile",
@@ -171,10 +160,10 @@ export const music_detailed_json = {
     "type": "music_detailed",
     "_id": 123336,
     "music_type": "song",
-    "song": "my really long song name that is a song. again my really long song name that is a song",
-    "album": "my really long album name that is a album. again my really long album name that is a album",
-    "artist": "my really long artist name that is a artist. again my really long artist name that is a artist",
-    "image": "album-cover1.jpeg",
+    "song": "loading",
+    "album": "loading",
+    "artist": "loading",
+    "image": "default-artist.jpg",
     "music_link": "www.spotify.com",
     "posts": posts_json
 }

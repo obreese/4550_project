@@ -4,7 +4,7 @@ import {
     findAllUsersThunk,
     findUserByIdThunk,
     loginThunk,
-    logoutThunk,
+    logoutThunk, profileColorThunk,
     profileThunk,
     registerThunk
 } from "./user-thunk";
@@ -12,8 +12,8 @@ import {
 const userReducer = createSlice({
     name: 'user',
     initialState: {
-        loggedIn: true,
-        currentUser: {color: '#FF0000'},
+        loggedIn: false,
+        currentUser: {},
         isAdmin: false,
         loading: false,
         profile: null

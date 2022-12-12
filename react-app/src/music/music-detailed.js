@@ -18,7 +18,9 @@ const MusicDetailedComponent = () => {
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
- 
+
+
+
     useEffect(() => {
         const findMusicDetailsParams = {
             music_id: urlParams.get('musicId'),
@@ -27,33 +29,41 @@ const MusicDetailedComponent = () => {
         dispatch(findMusicDetailsByIdThunk(findMusicDetailsParams))
     }, [])
 
+    let spotifyLink = "";
+    if (musicDetails) {
+        spotifyLink = 'https://open.spotify.com/' + musicDetails.music_type + '/' + musicDetails._id
+    }
+
+
     return (
         musicDetailsLoading ? <>Loading... <FaSpinner/></> :
         <>
             <div className="row music-item rounded">
                 <div className="col-1 d-inline-flex align-items-center">
-                    {renderIcon(musicDetails['music-type'])}
+                    {renderIcon(musicDetails.music_type)}
                 </div>
                 <div className="col-6">
                     <div className="row">
                         <div className="col fs-3 music-text">{musicDetails.artist}</div>
                     </div>
-                    {musicDetails['music-type'] !== 'artist' &&
+                    {musicDetails.music_type !== 'artist' &&
                         <div className="row">
                             <div className="col music-text">{musicDetails.album}</div>
                         </div>
                     }
-                    {musicDetails['music-type'] === 'song' &&
+                    {musicDetails.music_type === 'song' &&
                         <div className="row">
                             <div className="col music-text">{musicDetails.song}</div>
                         </div>
                     }
                 </div>
                 <div className="col-3">
-                    <img className="p-2" alt="album cover" height={100} src={`${musicDetails.image}`}/>
+                    <img className="p-2" alt="album cover" height={100} src={
+                        musicDetails.image ? musicDetails.image : '/images/default-artist.jpg'
+                    }/>
                 </div>
                 <div className="col-2 d-inline-flex align-items-center">
-                    <a href={musicDetails.link} target="_blank" rel="noopener noreferrer"
+                    <a href={spotifyLink} target="_blank" rel="noopener noreferrer"
                        className="text-decoration-none music-item">
                         <TiArrowForward size={40}/>
                     </a>
