@@ -12,12 +12,15 @@ import MusicDetailedComponent from "./music/music-detailed"
 import ProtectedRoute from "./user/protected-route";
 import {configureStore} from "@reduxjs/toolkit";
 import userReducer from "./user/user-reducer"
+import searchResultsReducer from "./music/search-results-reducer";
 import {Provider} from "react-redux";
 import CurrentUser from "./user/current-user";
 
+
 const store = configureStore({
     reducer: {
-        user: userReducer
+        user: userReducer,
+        searchResults: searchResultsReducer,
     }
 })
 
