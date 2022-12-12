@@ -1,5 +1,10 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import { findMusicDetails } from "./music-service";
+import { findAllMusic, findMusicDetails } from "./music-service";
+
+export const findAllMusicThunk = createAsyncThunk(
+  'findAllMusic',
+  async (searchTerm) => await findAllMusic(searchTerm)
+)
 
 export const findMusicDetailsByIdThunk = createAsyncThunk(
     'findMusicDetailsById',

@@ -72,6 +72,7 @@ const _formatMusicDetails = (musicData, type) => {
 
 const findAllMusic = async (req, res) => {
   const searchTerm = req.params['searchTerm']
+  
   let responses = await Promise.all([
     axios.get(`${SPOTIFY_BASE_URL}/search?q=${searchTerm}&type=track`),
     axios.get(`${SPOTIFY_BASE_URL}/search?q=${searchTerm}&type=album`),

@@ -16,8 +16,6 @@ const MusicDetailedComponent = () => {
     const { loggedIn } = useSelector((state) => state.user);
     const { musicDetails, musicDetailsLoading } = useSelector((state) => state.searchResults);
 
-    console.log('SEARCH RESULTS STATE: ', musicDetails, musicDetailsLoading)
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
  

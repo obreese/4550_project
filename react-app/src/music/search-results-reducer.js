@@ -1,6 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 import {
+    findAllMusicThunk,
     findMusicDetailsByIdThunk,
 } from "./search-results-thunk.js";
 
@@ -9,10 +10,17 @@ const searchResultsReducer = createSlice({
     initialState: {
         musicDetailsLoading: true,
         musicDetails: undefined,
-        resultsLoading: false,
-        results: [],
+        resultsLoading: true,
+        results: undefined,
     },
     extraReducers: {
+        [findAllMusicThunk.pending]: (state, action) => {
+            state.resultsLoading = true;
+        },
+        [findAllMusicThunk.fulfilled]: (state, action) => {
+            state.resultsLoading = false;
+            state.results = action.payload
+        },
         [findMusicDetailsByIdThunk.pending]: (state, action) => {
             state.musicDetailsLoading = true;
         },
