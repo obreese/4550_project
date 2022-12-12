@@ -2,27 +2,20 @@ import React from "react";
 import {useLocation} from "react-router-dom";
 import PublicProfileComponent from "./public-profile";
 import EditableProfileComponent from "./editable-profile";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from 'react';
+import {useSelector} from "react-redux";
 
-const ProfileComponent = ({loggedIn = false}) => {
-    const navigate = useNavigate()
+const ProfileComponent = () => {
+    const {loggedIn, isAdmin} = useSelector((state) => state.user)
     let location = useLocation().pathname.split("/")
-    let myprofile = false
-    let redirect = false
-    if (location.length === 2 || (location.length === 3 && (location[2] === 'followers' || location[2] === 'following' || location[2] === ''))) {
-        if (!loggedIn) {
-            redirect = true
-        } else {
-            myprofile = true
-        }
+    let myProfile = false
+    if (location.length === 2 || (location.length === 3 && location[2] === '')) {
+            myProfile = true
     }
-    useEffect(() => {
-        redirect && navigate("/login")
-    })
 
-    return (
-        myprofile ? <EditableProfileComponent/> : <PublicProfileComponent/>
-    );
+    if ((loggedIn && myProfile) || (loggedIn && isAdmin)) {
+        return <EditableProfileComponent/>
+    } else {
+        return <PublicProfileComponent/>
+    }
 };
 export default ProfileComponent;
