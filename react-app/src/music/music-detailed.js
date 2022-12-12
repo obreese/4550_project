@@ -17,6 +17,10 @@ const MusicDetailedComponent = ({
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
+
+    let spotifyLink = 'https://open.spotify.com/' + music.music_type + '/'
+
+    spotifyLink += music._id
  
     const updateMusicDetails = async () => {
         musicDetails = await findMusicDetails(urlParams.get('musicId'), urlParams.get("type"));
@@ -31,28 +35,30 @@ const MusicDetailedComponent = ({
         <>
             <div className="row music-item rounded">
                 <div className="col-1 d-inline-flex align-items-center">
-                    {renderIcon(music['music-type'])}
+                    {renderIcon(music.music_type)}
                 </div>
                 <div className="col-6">
                     <div className="row">
                         <div className="col fs-3 music-text">{music.artist}</div>
                     </div>
-                    {music['music-type'] !== 'artist' &&
+                    {music.music_type !== 'artist' &&
                         <div className="row">
                             <div className="col music-text">{music.album}</div>
                         </div>
                     }
-                    {music['music-type'] === 'song' &&
+                    {music.music_type === 'song' &&
                         <div className="row">
                             <div className="col music-text">{music.song}</div>
                         </div>
                     }
                 </div>
                 <div className="col-3">
-                    <img className="p-2" alt="album cover" height={100} src={`${music.image}`}/>
+                    <img className="p-2" alt="album cover" height={100} src={
+                        music.image ? music.image : '/images/default-artist.jpg'
+                    }/>
                 </div>
                 <div className="col-2 d-inline-flex align-items-center">
-                    <a href={music.link} target="_blank" rel="noopener noreferrer"
+                    <a href={spotifyLink} target="_blank" rel="noopener noreferrer"
                        className="text-decoration-none music-item">
                         <TiArrowForward size={40}/>
                     </a>
