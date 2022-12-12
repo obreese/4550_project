@@ -7,20 +7,20 @@ import CreatePostItem from "../posts/create-post-item"
 import {Link} from "react-router-dom";
 import {music_detailed_json} from "../json_examples";
 import { findMusicDetails } from "./music-service";
+import {useSelector} from "react-redux";
 
 
 const MusicDetailedComponent = ({
-    musicDetails = music_detailed_json,
-    loggedIn = true
+    musicDetails = music_detailed_json
 }) => {
     const [music, setMusic] = useState(musicDetails); // todo should change this is a proof of concept
+
+    const {loggedIn} = useSelector((state) => state.user)
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 
-    let spotifyLink = 'https://open.spotify.com/' + music.music_type + '/'
-
-    spotifyLink += music._id
+    let spotifyLink = 'https://open.spotify.com/' + music.music_type + '/' + music._id
  
     const updateMusicDetails = async () => {
         musicDetails = await findMusicDetails(urlParams.get('musicId'), urlParams.get("type"));

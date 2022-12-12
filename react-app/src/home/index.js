@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import  "react-icons/bi/index";
 import ContentList from "../list";
 import { findAllMusic } from "../music/music-service"
+import "./index.css"
 
 import {musics_json, posts_json, profile_items_json} from "../json_examples";
 import {createSearchParams, useLocation, useNavigate} from "react-router-dom";
@@ -22,14 +23,7 @@ const HomeComponent = ({contentInitial = []}) => {
     const handleKeyDown = (event) => {
         const searchTerm = event.target.value;
         if (event.key === 'Enter') {
-            if (searchTerm === "") {
-                navigate({
-                    pathname: '/',
-                });
-                
-                setContent(posts_json)
-            }
-            else {
+            if (searchTerm !== "") {
                 navigate({
                     pathname: '/search',
                     search: `?${createSearchParams({"search": searchTerm})}`, // todo do we really need this
@@ -43,6 +37,7 @@ const HomeComponent = ({contentInitial = []}) => {
 
     return (
         <>
+            <img src="/images/logo-2.png" className="big-logo pb-3"/>
             <input placeholder="Search People and Music"
                 className="form-control rounded-pill ps-3"
                 onKeyDown={handleKeyDown} // todo make sure x works and fix overflow error
