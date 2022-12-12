@@ -50,7 +50,7 @@ const _formatMusicDetails = (musicData, type) => {
     return {
       ...formattedMusicDetails,
       artist: musicData.name,
-      image: musicData.images[0].url,
+      image: musicData.images[0]?.url,
     }
   } else if (type === 'album') {
     return {
