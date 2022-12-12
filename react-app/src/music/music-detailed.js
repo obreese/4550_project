@@ -8,7 +8,7 @@ import CreatePostItem from "../posts/create-post-item"
 import {Link} from "react-router-dom";
 import {music_detailed_json} from "../json_examples";
 import { findMusicDetailsByIdThunk } from "./search-results-thunk";
-import { findMusicDetails } from "./music-service";
+import { FaSpinner } from "react-icons/fa";
 
 const MusicDetailedComponent = () => {
     const dispatch = useDispatch()
@@ -28,7 +28,7 @@ const MusicDetailedComponent = () => {
     }, [])
 
     return (
-        musicDetailsLoading ? <>LOADING</> :
+        musicDetailsLoading ? <>Loading... <FaSpinner/></> :
         <>
             <div className="row music-item rounded">
                 <div className="col-1 d-inline-flex align-items-center">

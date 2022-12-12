@@ -2,6 +2,7 @@ import "./App.css";
 import {Routes, Route} from "react-router";
 import {BrowserRouter} from "react-router-dom";
 import HomeComponent from "./home";
+import SearchComponent from "./search";
 import LoginComponent from "./login/login";
 import SignUpComponent from "./login/signup";
 import NavigationSidebar from "./navigation";
@@ -36,7 +37,7 @@ function App() {
                                 <Routes>
                                     <Route path="/" element={<HomeComponent/>}/>
                                     <Route path="/home" element={<HomeComponent/>}/>
-                                    <Route path="/search/*" element={<HomeComponent/>}/>
+                                    <Route path="/search/*" element={<SearchComponent/>}/>
                                     <Route path="/details/*" element={<MusicDetailedComponent/>}/>
                                     <Route path="/profile" element={
                                         <ProtectedRoute>
