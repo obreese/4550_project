@@ -21,7 +21,7 @@ const MusicItem = ({music}) => {
                             <div className="col music-text">{music.album}</div>
                         </div>
                     }
-                    {music.music_type === 'song' &&
+                    {music.music_type === 'track' &&
                         <div className="row">
                             <div className="col music-text">{music.song}</div>
                         </div>

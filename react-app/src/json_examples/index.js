@@ -158,13 +158,14 @@ export const musics_json = [{
 
 export const music_detailed_json = {
     "type": "music_detailed",
-    "_id": 123336,
+    "_id": "7GCLGlhaPXiVTsjAFz5XYx",
     "music_type": "song",
     "song": "loading",
     "album": "loading",
     "artist": "loading",
-    "image": "default-artist.jpg",
+    "image": "/images/default-artist.jpg",
     "music_link": "www.spotify.com",
+    "genres":["Prog rock", "Grunge"],
     "posts": posts_json
 }
 

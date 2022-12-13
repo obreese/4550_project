@@ -3,10 +3,13 @@ import {Link} from "react-router-dom";
 import ProfileStats from "./profile-stats";
 import {editable_profile_json} from "../json_examples";
 import ProfileColorDropdown from "./profile-colors";
+import {useSelector} from "react-redux";
 
 const EditableProfileComponent = ({profile = editable_profile_json}) => {
 
     const [currentColor, setCurrentColor] = useState('')
+
+    const {isAdmin} = useSelector((state) => state.user)
 
     return (
         <div className={"border rounded"}>

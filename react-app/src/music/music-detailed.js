@@ -46,14 +46,19 @@ const MusicDetailedComponent = ({
                             <div className="col music-text">{music.album}</div>
                         </div>
                     }
-                    {music.music_type === 'song' &&
+                    {music.music_type === 'track' &&
                         <div className="row">
                             <div className="col music-text">{music.song}</div>
                         </div>
                     }
+                    {music.genres &&
+                    <div className="row  mt-2 mb-2">
+                        <div className=" genre-box rounded-3">{music.genres.map(genre => ' ' + genre).join()}</div>
+                    </div>
+                    }
                 </div>
                 <div className="col-3">
-                    <img className="p-2" alt="album cover" height={100} src={
+                    <img className="p-2" alt="album cover" height={130} src={
                         music.image ? music.image : '/images/default-artist.jpg'
                     }/>
                 </div>

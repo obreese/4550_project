@@ -19,3 +19,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.genre-box {
+    background-color: white;
+    color: var(--green) !important;
+    width: fit-content !important;
+    block-size: fit-content !important;
+    min-width: 200px !important;
+}
