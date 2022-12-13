@@ -4,6 +4,9 @@ import "./index.css"
 import {Link} from "react-router-dom";
 import "./signup.css"
 import ProfileColorDropdown from "../profile/profile-colors";
+import {useDispatch, useSelector} from "react-redux";
+import {Navigate} from "react-router";
+import {registerThunk} from "./../user/user-thunk";
 
 
 const SignUpComponent = () => {
@@ -16,22 +19,36 @@ const SignUpComponent = () => {
     const [password2, setPassword2] = useState('');
     const [currentColor, setCurrentColor] = useState('');
 
+    const {currentUser} = useSelector((state) => state.user)
+    const dispatch = useDispatch()
+
+    /*
+    if(currentUser) {
+        return (<Navigate to={'/profile'}/>)
+    }
+
+     */
+
     const handleSignUp = () => {
         if (fname === '' || lname === '') {
             alert('name cannot be empty')
             return
         }
-        if (username === '') {
+        else if (username === '') {
             alert('username cannot be empty')
             return
         }
-        if (email === '') {
+        else if (email === '') {
             alert('email cannot be empty')
             return
         }
-        if (password1 === '' || password1 !== password2) {
+        else if (password1 === '' || password1 !== password2) {
             alert('invalid passwords')
             return
+        }
+        else {
+            dispatch(registerThunk({username, password1}))
+            return (<Navigate to={'/login'}/>)
         }
     }
 
