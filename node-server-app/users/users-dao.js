@@ -1,5 +1,6 @@
 import usersModel from "./users-model.js";
 
+
 export const createUser = async (user) =>
     await usersModel.create(user)
 
@@ -16,8 +17,8 @@ export const deleteUser = async (uid) =>
     await usersModel.deleteOne({_id: uid})
 
 export const updateUser = async (uid, userUpdates) =>
-    await usersModel.updateOne({_id: uid},
-        {$set: userUpdates})
+    await usersModel.findByIdAndUpdate({_id: uid},
+        {$set: userUpdates}, {returnDocument: "after", lean: "true"})
 
 export const findUserById = (uid) =>
     usersModel.findById(uid, {password: false})

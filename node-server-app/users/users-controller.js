@@ -1,9 +1,6 @@
 import * as userDao from './users-dao.js'
 
-let currentUser = null
-
 const UsersController = (app) => {
-
     const findAllUsers = async (req, res) => {
         const users = await userDao.findAllUsers()
         res.json(users)
@@ -13,7 +10,14 @@ const UsersController = (app) => {
         const actualUser = await userDao.createUser(newUser)
         res.json(actualUser)
     }
-    const updateUser = () => {}
+    const updateUser = async (req, res) => {
+        const uid = req.params.uid;
+        const user = req.body;
+        const updatedUser = await userDao.updateUser(uid, user);
+        req.session['currentUser'] = updatedUser;
+        res.json(updatedUser)
+        return
+    }
     const deleteUser = () => {}
 
     const register = async (req, res) => {

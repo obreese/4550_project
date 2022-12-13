@@ -22,12 +22,12 @@ const MusicLinkItem = ({music}) => {
                 <div className="row">
                     <div className="col music-link-text">{music.artist}</div>
                 </div>
-                {music['music-type'] !== 'artist' &&
+                {music.music_type !== 'artist' &&
                     <div className="row">
                         <div className="col music-link-text">{music.album}</div>
                     </div>
                 }
-                {music['music-type'] === 'song' &&
+                {music.music_type === 'track' &&
                     <div className="row">
                         <div className="col music-link-text">{music.song}</div>
                     </div>
