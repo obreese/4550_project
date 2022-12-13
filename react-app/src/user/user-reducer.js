@@ -6,7 +6,8 @@ import {
     loginThunk,
     logoutThunk, profileColorThunk,
     profileThunk,
-    registerThunk
+    registerThunk,
+    updateUserThunk
 } from "./user-thunk";
 
 const userReducer = createSlice({
@@ -19,6 +20,9 @@ const userReducer = createSlice({
         profile: null
     },
     extraReducers: {
+        [updateUserThunk.fulfilled]: (state, action) => {
+            state.currentUser = action.payload
+        },
         [findUserByIdThunk.fulfilled]: (state, action) => {
             state.currentUser = action.payload
         },

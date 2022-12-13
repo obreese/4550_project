@@ -13,7 +13,15 @@ const UsersController = (app) => {
         const actualUser = await userDao.createUser(newUser)
         res.json(actualUser)
     }
-    const updateUser = () => {}
+    const updateUser = async (req, res) => {
+        const uid = req.params.uid;
+        const user = req.body;
+        const updatedUser = await userDao.updateUser(uid, user);
+        console.log(updatedUser)
+        req.session['currentUser'] = updatedUser;
+        res.json(updatedUser)
+        return
+    }
     const deleteUser = () => {}
 
     const register = async (req, res) => {
