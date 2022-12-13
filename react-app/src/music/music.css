@@ -11,11 +11,19 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 150px;
+    max-width: 150px !important;
 }
 
 .music-text {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.genre-box {
+    background-color: white;
+    color: var(--green) !important;
+    width: fit-content !important;
+    block-size: fit-content !important;
+    min-width: 200px !important;
 }

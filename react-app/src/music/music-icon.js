@@ -5,7 +5,7 @@ import React from "react";
 
 export function renderIcon(musicType) {
     switch (musicType) {
-        case 'song':
+        case 'track':
             return <FaMusic size={30} className="img-fluid"/>
         case 'album':
             return <BiAlbum size={30} className="img-fluid"/>

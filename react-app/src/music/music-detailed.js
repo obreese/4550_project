@@ -44,21 +44,27 @@ const MusicDetailedComponent = () => {
                 </div>
                 <div className="col-6">
                     <div className="row">
-                        <div className="col fs-3 music-text">{musicDetails.artist}</div>
+                        <div className={`col ${musicDetails.music_type === 'artist' && "fs-3"} music-text`}>{musicDetails.artist}</div>
                     </div>
                     {musicDetails.music_type !== 'artist' &&
                         <div className="row">
-                            <div className="col music-text">{musicDetails.album}</div>
+                            <div className={`col ${musicDetails.music_type === 'album' && "fs-3"} music-text`}>{musicDetails.album}</div>
                         </div>
                     }
-                    {musicDetails.music_type === 'song' &&
+                    {musicDetails.music_type === 'track' &&
+
                         <div className="row">
-                            <div className="col music-text">{musicDetails.song}</div>
+                            <div className={`col ${musicDetails.music_type === 'track' && "fs-3"} music-text`}>{musicDetails.song}</div>
                         </div>
+                    }
+                    {musicDetails.genres &&
+                    <div className="row  mt-2 mb-2">
+                        <div className=" genre-box rounded-3">{musicDetails.genres.map(genre => ' ' + genre).join()}</div>
+                    </div>
                     }
                 </div>
                 <div className="col-3">
-                    <img className="p-2" alt="album cover" height={100} src={
+                    <img className="p-2" alt="album cover" height={130} src={
                         musicDetails.image ? musicDetails.image : '/images/default-artist.jpg'
                     }/>
                 </div>

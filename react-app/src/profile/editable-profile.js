@@ -39,6 +39,8 @@ const EditableProfileComponent = (/*{profile = editable_profile_json}*/) => {
 
 
 
+    const {isAdmin} = useSelector((state) => state.user)
+
     return (
         <div className={"border rounded"}>
             <div className="row">
@@ -95,7 +97,7 @@ const EditableProfileComponent = (/*{profile = editable_profile_json}*/) => {
                             </div>
                         </div>
                     </div>
-                    <ProfileStats profile={currentUser}/>
+                    <ProfileStats user={currentUser} editable={true}/>
                 </div>
             </div>
         </div>

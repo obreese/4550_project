@@ -3,11 +3,13 @@ import fetch from 'node-fetch'
 import { Headers } from 'node-fetch';
 
 export const spotifyAuth = async () => {
-  const client_id = 'd3cc2c02817d4c8d8ecfcbc9f055041d';
-  const client_secret = 'badc8fcb10a94e78a8485b47f80715db';
+  const client_id = process.env.SPOTIFY_API_CLIENT_ID
+  const client_secret = process.env.SPOTIFY_API_CLIENT_SECRET
+  
+  const auth = (Buffer.from(client_id + ':' + client_secret).toString('base64'));
   
   let myHeaders = new Headers();
-  myHeaders.append("Authorization", `Basic ZDNjYzJjMDI4MTdkNGM4ZDhlY2ZjYmM5ZjA1NTA0MWQ6YmFkYzhmY2IxMGE5NGU3OGE4NDg1YjQ3ZjgwNzE1ZGI`);
+  myHeaders.append("Authorization", `Basic ${auth}`);
   myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
   var urlencoded = new URLSearchParams();
