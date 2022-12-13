@@ -5,6 +5,7 @@ import session from 'express-session'
 import { spotifyAuth } from './spotify_auth/spotify-auth-controller.js';
 import mongoose from "mongoose";
 import UsersController from "./users/users-controller.js";
+
 const CONNECTION_STRING = process.env.DB_CONNECTION_STRING
     || 'mongodb://127.0.0.1:27017/goodlistensdb';
 
@@ -25,12 +26,11 @@ mongoose.connect(CONNECTION_STRING, options);
 
 
 const app = express();
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 
-/*
 app.use(cors({
-    credentials: false,
+    credentials: true,
     origin: 'http://localhost:3000'
 }))
 
@@ -40,7 +40,7 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: false }
 }))
-*/
+
 await spotifyAuth();
 
 MusicController(app);

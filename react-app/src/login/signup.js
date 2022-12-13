@@ -15,7 +15,7 @@ const SignUpComponent = () => {
     const [lname, setLname] = useState('');
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
-    const [password1, setPassword1] = useState('');
+    const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
     const [currentColor, setCurrentColor] = useState('');
 
@@ -42,12 +42,12 @@ const SignUpComponent = () => {
             alert('email cannot be empty')
             return
         }
-        else if (password1 === '' || password1 !== password2) {
+        else if (password === '' || password !== password2) {
             alert('invalid passwords')
             return
         }
         else {
-            dispatch(registerThunk({username, password1}))
+            dispatch(registerThunk({username, password}))
             return (<Navigate to={'/login'}/>)
         }
     }
@@ -84,7 +84,7 @@ const SignUpComponent = () => {
                     </div>
                     <label htmlFor="pass-input">Password</label>
                     <input className="form-control rounded-pill ps-3 mb-3" name="pass-input" type="password"
-                           onChange={(e) => setPassword1(e.target.value)} placeholder="password"></input>
+                           onChange={(e) => setPassword(e.target.value)} placeholder="password"></input>
                     <label htmlFor="pass2-input">Confirm Password</label>
                     <input className="form-control rounded-pill ps-3" name="pass2-input" type="password"
                            onChange={(e) => setPassword2(e.target.value)} placeholder="password"></input>
