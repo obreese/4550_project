@@ -1,4 +1,5 @@
 import React from "react";
+import {useSelector} from "react-redux";
 
 const ProfileColors = [
     "#3EA4D6",
@@ -14,7 +15,10 @@ const ProfileColors = [
 
 const ProfileColorDropdown = ({currentColor, setCurrentColor}) => {
 
+
     if (currentColor === '') setCurrentColor('#3EA4D6')
+
+
 
     return (
         <div className="dropdown">

@@ -20,10 +20,9 @@ const userReducer = createSlice({
     },
     extraReducers: {
         [findUserByIdThunk.fulfilled]: (state, action) => {
-            state.profile = action.payload
+            state.currentUser = action.payload
         },
         [logoutThunk.fulfilled]: (state, action) => {
-            state.loggedIn = false
             state.currentUser = null
         },
         [profileThunk.fulfilled]: (state, action) => {

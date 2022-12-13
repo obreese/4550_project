@@ -27,6 +27,6 @@ export const logout = async () => {
     return response.data
 }
 export const profile = async () => {
-    const response = await api.post(`${BASE_API_URL}/profile`)
+    const response = await api.put(`${BASE_API_URL}/profile`)
     return response.data
 }

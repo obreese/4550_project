@@ -1,6 +1,10 @@
 import React from "react";
+import {logoutThunk} from "../user/user-thunk";
+import {useDispatch} from "react-redux";
 
 const LogoutComponent = () => {
+    const dispatch = useDispatch()
+    dispatch(logoutThunk())
     return (
         <div className={"border rounded"}>
             <div className="row">

@@ -11,26 +11,26 @@ import {registerThunk} from "./../user/user-thunk";
 
 const SignUpComponent = () => {
 
-    const [fname, setFname] = useState('');
-    const [lname, setLname] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
-    const [currentColor, setCurrentColor] = useState('');
+    const [currentColor, setCurrentColor] = useState('#3EA4D6');
+    const [isAdmin, setIsAdmin] = useState(false)
 
     const {currentUser} = useSelector((state) => state.user)
+    console.log(currentUser)
     const dispatch = useDispatch()
 
-    /*
+
     if(currentUser) {
         return (<Navigate to={'/profile'}/>)
     }
 
-     */
-
     const handleSignUp = () => {
-        if (fname === '' || lname === '') {
+        if (firstName === '' || lastName === '') {
             alert('name cannot be empty')
             return
         }
@@ -47,8 +47,7 @@ const SignUpComponent = () => {
             return
         }
         else {
-            dispatch(registerThunk({username, password}))
-            return (<Navigate to={'/login'}/>)
+            dispatch(registerThunk({username, password, firstName, lastName, email, currentColor, isAdmin}))
         }
     }
 
@@ -60,12 +59,12 @@ const SignUpComponent = () => {
                         <div className="col">
                             <label htmlFor="fname-input">First Name</label>
                             <input className="form-control rounded-pill ps-3" name="fname-input" type="text"
-                                   onChange={(e) => setFname(e.target.value)} placeholder="John"></input>
+                                   onChange={(e) => setFirstName(e.target.value)} placeholder="John"></input>
                         </div>
                         <div className="col">
                             <label htmlFor="lname-input">Last Name</label>
                             <input className="form-control rounded-pill ps-3 mb-3" name="lname-input" type="text"
-                                   onChange={(e) => setLname(e.target.value)} placeholder="Appleseed"></input>
+                                   onChange={(e) => setLastName(e.target.value)} placeholder="Appleseed"></input>
                         </div>
                     </div>
                     <label htmlFor="email-input">Email</label>

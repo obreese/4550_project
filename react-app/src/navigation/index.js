@@ -8,7 +8,7 @@ import {useSelector} from "react-redux";
 
 
 const NavigationSidebar = () => {
-    const {loggedIn} = useSelector((state) => state.user)
+    const {currentUser} = useSelector((state) => state.user)
     let location = useLocation().pathname.split("/")
     if (location.length > 1 && location[1] === "") {
         location = "home"
@@ -29,7 +29,7 @@ const NavigationSidebar = () => {
             >
                 <AiFillHome/><p className="d-none d-md-none d-lg-inline"> Home</p>
             </Link>
-            {loggedIn &&
+            {currentUser &&
             <Link
                 to="/profile"
                 className={`list-group-item
