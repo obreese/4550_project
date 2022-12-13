@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
+import { useSelector, useDispatch} from "react-redux";
 import "react-icons/bi/index"
 import {renderIcon} from "./music-icon";
 import {TiArrowForward} from "react-icons/ti"
@@ -6,60 +7,65 @@ import ContentList from "../list";
 import CreatePostItem from "../posts/create-post-item"
 import {Link} from "react-router-dom";
 import {music_detailed_json} from "../json_examples";
-import { findMusicDetails } from "./music-service";
-import {useSelector} from "react-redux";
+import { findMusicDetailsByIdThunk } from "./search-results-thunk";
+import { FaSpinner } from "react-icons/fa";
 
+const MusicDetailedComponent = () => {
+    const dispatch = useDispatch()
 
-const MusicDetailedComponent = ({
-    musicDetails = music_detailed_json
-}) => {
-    const [music, setMusic] = useState(musicDetails); // todo should change this is a proof of concept
-
-    const {loggedIn} = useSelector((state) => state.user)
+    const { loggedIn } = useSelector((state) => state.user);
+    const { musicDetails, musicDetailsLoading } = useSelector((state) => state.searchResults);
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 
-    let spotifyLink = 'https://open.spotify.com/' + music.music_type + '/' + music._id
- 
-    const updateMusicDetails = async () => {
-        musicDetails = await findMusicDetails(urlParams.get('musicId'), urlParams.get("type"));
-        setMusic(musicDetails);
-    }
+
 
     useEffect(() => {
-        updateMusicDetails()
-    }, []);
+        const findMusicDetailsParams = {
+            music_id: urlParams.get('musicId'),
+            type: urlParams.get("type")
+        }
+        dispatch(findMusicDetailsByIdThunk(findMusicDetailsParams))
+    }, [])
+
+    let spotifyLink = "";
+    if (musicDetails) {
+        spotifyLink = 'https://open.spotify.com/' + musicDetails.music_type + '/' + musicDetails._id
+    }
+
 
     return (
+        musicDetailsLoading ? <>Loading... <FaSpinner/></> :
         <>
             <div className="row music-item rounded">
                 <div className="col-1 d-inline-flex align-items-center">
-                    {renderIcon(music.music_type)}
+                    {renderIcon(musicDetails.music_type)}
                 </div>
                 <div className="col-6">
                     <div className="row">
-                        <div className="col fs-3 music-text">{music.artist}</div>
+                        <div className="col fs-3 music-text">{musicDetails.artist}</div>
                     </div>
-                    {music.music_type !== 'artist' &&
+                    {musicDetails.music_type !== 'artist' &&
                         <div className="row">
-                            <div className="col music-text">{music.album}</div>
+                            <div className="col music-text">{musicDetails.album}</div>
                         </div>
                     }
-                    {music.music_type === 'track' &&
+                    {musicDetails.music_type === 'track' &&
+
                         <div className="row">
-                            <div className="col music-text">{music.song}</div>
+                            <div className="col music-text">{musicDetails.song}</div>
                         </div>
                     }
-                    {music.genres &&
+                    {musicDetails.genres &&
                     <div className="row  mt-2 mb-2">
-                        <div className=" genre-box rounded-3">{music.genres.map(genre => ' ' + genre).join()}</div>
+                        <div className=" genre-box rounded-3">{musicDetails.genres.map(genre => ' ' + genre).join()}</div>
                     </div>
                     }
                 </div>
                 <div className="col-3">
                     <img className="p-2" alt="album cover" height={130} src={
-                        music.image ? music.image : '/images/default-artist.jpg'
+                        musicDetails.image ? musicDetails.image : '/images/default-artist.jpg'
                     }/>
                 </div>
                 <div className="col-2 d-inline-flex align-items-center">
@@ -70,13 +76,13 @@ const MusicDetailedComponent = ({
                 </div>
             </div>
             <div className="row border rounded p-2 mt-3 mb-3">
-            {loggedIn ? <CreatePostItem music={music}/> :
+            {loggedIn ? <CreatePostItem music={musicDetails}/> :
                 <Link to="/login" className="p-4 fs-3 text-black">Login to post</Link>}
             </div>
             <div className="row">
             {/* <ContentList arr={music.posts}/> todo uncomment */}
             {/* {loggedIn && music.posts.length === 0 && "Be the first to post"} */}
-            </div>
+            </div> 
         </>
     );
 };

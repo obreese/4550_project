@@ -2,6 +2,7 @@ import "./App.css";
 import {Routes, Route} from "react-router";
 import {BrowserRouter} from "react-router-dom";
 import HomeComponent from "./home";
+import SearchComponent from "./search";
 import LoginComponent from "./login/login";
 import SignUpComponent from "./login/signup";
 import NavigationSidebar from "./navigation";
@@ -12,12 +13,15 @@ import MusicDetailedComponent from "./music/music-detailed"
 import ProtectedRoute from "./user/protected-route";
 import {configureStore} from "@reduxjs/toolkit";
 import userReducer from "./user/user-reducer"
+import searchResultsReducer from "./music/search-results-reducer";
 import {Provider} from "react-redux";
 import CurrentUser from "./user/current-user";
 
+
 const store = configureStore({
     reducer: {
-        user: userReducer
+        user: userReducer,
+        searchResults: searchResultsReducer,
     }
 })
 
@@ -33,7 +37,7 @@ function App() {
                                 <Routes>
                                     <Route path="/" element={<HomeComponent/>}/>
                                     <Route path="/home" element={<HomeComponent/>}/>
-                                    <Route path="/search/*" element={<HomeComponent/>}/>
+                                    <Route path="/search/*" element={<SearchComponent/>}/>
                                     <Route path="/details/*" element={<MusicDetailedComponent/>}/>
                                     <Route path="/profile" element={
                                         <ProtectedRoute>
