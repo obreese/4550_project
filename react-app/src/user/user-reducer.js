@@ -12,7 +12,7 @@ import {
 const userReducer = createSlice({
     name: 'user',
     initialState: {
-        loggedIn: false,
+        loggedIn: true,
         currentUser: {},
         isAdmin: false,
         loading: false,

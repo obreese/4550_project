@@ -44,17 +44,17 @@ const MusicDetailedComponent = () => {
                 </div>
                 <div className="col-6">
                     <div className="row">
-                        <div className="col fs-3 music-text">{musicDetails.artist}</div>
+                        <div className={`col ${musicDetails.music_type === 'artist' && "fs-3"} music-text`}>{musicDetails.artist}</div>
                     </div>
                     {musicDetails.music_type !== 'artist' &&
                         <div className="row">
-                            <div className="col music-text">{musicDetails.album}</div>
+                            <div className={`col ${musicDetails.music_type === 'album' && "fs-3"} music-text`}>{musicDetails.album}</div>
                         </div>
                     }
                     {musicDetails.music_type === 'track' &&
 
                         <div className="row">
-                            <div className="col music-text">{musicDetails.song}</div>
+                            <div className={`col ${musicDetails.music_type === 'track' && "fs-3"} music-text`}>{musicDetails.song}</div>
                         </div>
                     }
                     {musicDetails.genres &&

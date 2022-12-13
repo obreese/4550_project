@@ -1,5 +1,4 @@
 textarea {
-    resize: horizontal;
     overflow: hidden;
-    resize: none;
+    resize: none !important;
 }

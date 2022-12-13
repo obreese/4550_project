@@ -56,7 +56,7 @@ const EditableProfileComponent = ({profile = editable_profile_json}) => {
                             </div>
                         </div>
                     </div>
-                    <ProfileStats profile={profile}/>
+                    <ProfileStats user={profile} editable={true}/>
                 </div>
             </div>
         </div>

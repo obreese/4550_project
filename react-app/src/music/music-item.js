@@ -14,16 +14,16 @@ const MusicItem = ({music}) => {
                 </div>
                 <div className="col-7">
                     <div className="row">
-                        <div className="col fs-3 music-text">{music.artist}</div>
+                        <div className={`col ${music.music_type === 'artist' && "fs-3"} music-text pt-2`}>{music.artist}</div>
                     </div>
                     {music.music_type !== 'artist' &&
                         <div className="row">
-                            <div className="col music-text">{music.album}</div>
+                            <div className={`col ${music.music_type === 'album' && "fs-3"} music-text`}>{music.album}</div>
                         </div>
                     }
                     {music.music_type === 'track' &&
                         <div className="row">
-                            <div className="col music-text">{music.song}</div>
+                            <div className={`col ${music.music_type === 'track' && "fs-3"} music-text`}>{music.song}</div>
                         </div>
                     }
                 </div>

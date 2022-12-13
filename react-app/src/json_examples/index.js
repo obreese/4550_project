@@ -14,11 +14,11 @@ export const posts_json = [{
     "music": {
         "type": "music",
         "_id": 8236,
-        "music_type": "song",
+        "music_type": "track",
         "song": "my really long song name that is a song",
         "album": "my really long album name that is a album",
         "artist": "my really long artist name that is a artist",
-        "image": "album-cover1.jpeg",
+        "image": "/images/album-cover1.jpeg",
         "music_link": "www.spotify.com",
         "music_id": 6666
     },
@@ -36,7 +36,7 @@ export const posts_json = [{
         "_id": 8237,
         "music_type": "artist",
         "artist": "my really long artist name that is a artist",
-        "image": "album-cover2.jpeg",
+        "image": "/images/album-cover1.jpeg",
         "music_link": "www.spotify.com",
         "music_id": 6666
     },
@@ -55,7 +55,7 @@ export const posts_json = [{
         "music_type": "album",
         "album": "my really long album name that is a album",
         "artist": "my really long artist name that is a artist",
-        "image": "album-cover3.webp",
+        "image": "/images/album-cover3.webp",
         "music_link": "www.spotify.com",
         "music_id": 6666
     },
@@ -126,7 +126,7 @@ export const editable_profile_json = {
 export const musics_json = [{
     "type": "music",
     "_id": 2236,
-    "music_type": "song",
+    "music_type": "track",
     "song": "pink + white",
     "album": "blonde",
     "artist": "frank ocean",
@@ -159,7 +159,7 @@ export const musics_json = [{
 export const music_detailed_json = {
     "type": "music_detailed",
     "_id": "7GCLGlhaPXiVTsjAFz5XYx",
-    "music_type": "song",
+    "music_type": "track",
     "song": "loading",
     "album": "loading",
     "artist": "loading",
