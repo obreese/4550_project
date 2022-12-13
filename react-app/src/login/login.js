@@ -9,17 +9,13 @@ import {loginThunk} from "./../user/user-thunk";
 
 const LoginComponent = () => {
     const {currentUser} = useSelector((state) => state.user)
-    const {loggedIn} = useSelector((state) => state.user)
-    console.log({currentUser})
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const handleLoginBtn = () => {
         try {
-            dispatch(loginThunk({username, password}))
-            //return (<Navigate to={'/login'}/>)
-            // navigate('/profile')
+            dispatch(loginThunk({username, password}));
         } catch (e) {
 
         }
@@ -28,8 +24,6 @@ const LoginComponent = () => {
     if (currentUser) {
         return (<Navigate to={'/profile'}/>)
     }
-
-
 
     return (
         <div className={"border rounded"}>

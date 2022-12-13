@@ -13,7 +13,7 @@ import { FaSpinner } from "react-icons/fa";
 const MusicDetailedComponent = () => {
     const dispatch = useDispatch()
 
-    const { loggedIn } = useSelector((state) => state.user);
+    const { currentUser } = useSelector((state) => state.user);
     const { musicDetails, musicDetailsLoading } = useSelector((state) => state.searchResults);
 
     const queryString = window.location.search;
@@ -76,7 +76,7 @@ const MusicDetailedComponent = () => {
                 </div>
             </div>
             <div className="row border rounded p-2 mt-3 mb-3">
-            {loggedIn ? <CreatePostItem music={musicDetails}/> :
+            {!currentUser ? <CreatePostItem music={musicDetails}/> :
                 <Link to="/login" className="p-4 fs-3 text-black">Login to post</Link>}
             </div>
             <div className="row">

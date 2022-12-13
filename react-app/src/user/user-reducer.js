@@ -13,8 +13,7 @@ import {
 const userReducer = createSlice({
     name: 'user',
     initialState: {
-        loggedIn: true,
-        currentUser: {},
+        currentUser: undefined,
         isAdmin: false,
         loading: false,
         profile: null

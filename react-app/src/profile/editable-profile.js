@@ -7,12 +7,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {updateUserThunk} from "../user/user-thunk";
 import {current} from "@reduxjs/toolkit";
 
-const EditableProfileComponent = (/*{profile = editable_profile_json}*/) => {
-
-
+const EditableProfileComponent = () => {
     const {currentUser} = useSelector((state) => state.user)
-    console.log(currentUser)
-    console.log(currentUser.firstName)
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');

@@ -18,10 +18,8 @@ const SignUpComponent = () => {
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
     const [currentColor, setCurrentColor] = useState('#3EA4D6');
-    const [isAdmin, setIsAdmin] = useState(false)
 
     const {currentUser} = useSelector((state) => state.user)
-    console.log(currentUser)
     const dispatch = useDispatch()
 
 
@@ -47,7 +45,7 @@ const SignUpComponent = () => {
             return
         }
         else {
-            dispatch(registerThunk({username, password, firstName, lastName, email, currentColor, isAdmin}))
+            dispatch(registerThunk({username, password, firstName, lastName, email, currentColor}))
         }
     }
 
