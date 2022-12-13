@@ -4,8 +4,7 @@ import ProfileStats from "./profile-stats";
 import {editable_profile_json} from "../json_examples";
 import ProfileColorDropdown from "./profile-colors";
 import {useDispatch, useSelector} from "react-redux";
-import {updateUserThunk} from "../user/user-thunk";
-import {current} from "@reduxjs/toolkit";
+import {deleteUserThunk, updateUserThunk} from "../user/user-thunk";
 
 const EditableProfileComponent = () => {
     const {currentUser} = useSelector((state) => state.user)
@@ -28,6 +27,14 @@ const EditableProfileComponent = () => {
         if (newUser['currentColor'] == "") newUser["currentColor"] = currentUser.currentColor
         try {
             dispatch(updateUserThunk({newUserId, newUser}))
+        } catch (e) {
+
+        }
+    }
+
+    const handleDeleteButton = () => {
+        try {
+            dispatch(deleteUserThunk(currentUser._id))
         } catch (e) {
 
         }
@@ -88,7 +95,9 @@ const EditableProfileComponent = () => {
                                     <button type="button" className={"btn btn-warning"}>Request Admin</button>
                                 </div>
                                 <div className="col-5">
-                                    <button type="button" className={"btn btn-danger"}>Delete Account</button>
+                                    <button
+                                        onClick={handleDeleteButton}
+                                        type="button" className={"btn btn-danger"}>Delete Account</button>
                                 </div>
                             </div>
                         </div>

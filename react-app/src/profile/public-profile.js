@@ -1,8 +1,15 @@
 import React from "react";
 import ProfileStats from "./profile-stats";
 import {profile_json} from "../json_examples";
+import {useDispatch, useSelector} from "react-redux";
+import {findUserByIdThunk} from "../user/user-thunk";
 
-const PublicProfileComponent = ({profile = profile_json}) => {
+const PublicProfileComponent = ({profileid}) => {
+
+    const dispatch = useDispatch();
+
+    const profile = dispatch(findUserByIdThunk({profileId}))
+
     return (
         <div className={"border rounded"}>
             <div className="row">

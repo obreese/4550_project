@@ -18,7 +18,16 @@ const UsersController = (app) => {
         res.json(updatedUser)
         return
     }
-    const deleteUser = () => {}
+    const deleteUser = async (req, res) => {
+        const uid = req.params.uid;
+        const user = await userDao.findUserById(uid)
+        if (user) {
+            const deletedUser = await userDao.deleteUser(uid)
+            res.json(deletedUser)
+            return
+        }
+        res.sendStatus(404)
+    }
 
     const register = async (req, res) => {
         const user = req.body;
