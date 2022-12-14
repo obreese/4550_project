@@ -6,7 +6,7 @@ const postsSchema = mongoose.Schema({
     lname: {type: String, required: true},
     username: {type: String, required: true},
     user_id: {type: String, required: true},
-    time: {type: Number, required: true},
+    time: {type: Number, default: Math.floor(Date.now() / 1000)},
     music: {type: Object, required: true},
     body: {type: String, required: true},
 }, {collection: 'posts'})

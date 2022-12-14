@@ -1,18 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import MusicLinkItem from "../music/music-link-item";
-import './creat-post-item.css'
+import './create-post-item.css'
+import { createPost } from "./posts-service";
+import { updateUserThunk } from '../user/user-thunk.js'
 
-const CreatePostItem = ({music}) => {
+const CreatePostItem = ({music, updatePosts}) => {
+    const dispatch = useDispatch()
+
+    const [body, setBody] = useState("");
+    const { currentUser } = useSelector((state) => state.user);
 
     const handleKeyDown = (e) => {
         e.target.style.height = 'inherit';
         e.target.style.height = `${e.target.scrollHeight}px`;
-        // In case you have a limitation
-        // e.target.style.height = `${Math.min(e.target.scrollHeight, limit)}px`;
+        setBody(e.target.value)
     }
 
-    return (
+    const handlePost = async () => {
+        const newPost = {
+            type: 'post',
+            fname: currentUser.firstName,
+            lname: currentUser.lastName,
+            username: currentUser.username,
+            user_id: currentUser._id,
+            music,
+            body,
+        }
+        const createdPost = await createPost(newPost);
+        const newUser = {posts: [...currentUser.posts, createdPost._id]};
+        dispatch(updateUserThunk({newUserId: currentUser._id, newUser}));
+        updatePosts(music._id);
+    }
 
+
+    return (
         <>
             <div className="col">
                 <div className="row">
@@ -21,7 +43,7 @@ const CreatePostItem = ({music}) => {
                 </div>
                 <div className="row p-2">
                     <div className="col3">
-                        <button className="btn active text-white">Post</button>
+                        <button className="btn active text-white" onClick={handlePost}>Post</button>
                     </div>
                 </div>
             </div>

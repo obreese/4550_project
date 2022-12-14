@@ -4,6 +4,11 @@ const POST_API_URL = 'http://localhost:4000/posts'
 
 const api = axios.create({withCredentials: true});
 
+export const createPost = async (post) => {
+    const response = await api.post(`${POST_API_URL}`, post)
+    return response.data
+}
+
 export const findAllPosts = async (pid) => {
     const response = await api.get(`${POST_API_URL}`)
     const posts = response.data

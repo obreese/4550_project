@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import MusicLinkItem from "../music/music-link-item";
-import './creat-post-item.css'
+import './create-post-item.css'
 import {useEffect} from 'react'
 
-const EditPostItem = ({post = {}}) => {
+const EditPostItem = ({post}) => {
+    const dispatch = useDispatch()
 
+    const [body, setBody] = useState("");
+    const { currentUser } = useSelector((state) => state.user);
 
     useEffect(() => {
         updateTextArea()

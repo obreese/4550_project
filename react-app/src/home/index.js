@@ -15,14 +15,14 @@ const HomeComponent = () => {
 
     const getFollowingPosts = async () => {
         const newPosts = await Promise.all(Array.from(currentUser.following.map((uid) => findPostsByUserId(uid))))
-        newPosts.sort((post1, post2) => (post1.time > post2.time) ? 1 : -1)
+        newPosts.sort((post1, post2) => (post1.time < post2.time) ? 1 : -1)
 
         setPosts(newPosts.flat());
     }
 
     const getRecentPosts = async () => {
         const newPosts = await findAllPosts();
-        newPosts.sort((post1, post2) => (post1.time > post2.time) ? 1 : -1)
+        newPosts.sort((post1, post2) => (post1.time < post2.time) ? 1 : -1)
 
         setPosts(newPosts.slice(0, 10));
     }
@@ -52,7 +52,7 @@ const HomeComponent = () => {
                 className="form-control rounded-pill ps-3"
                 onKeyDown={handleKeyDown}
                 type="search"/>
-            <ContentList arr={posts}/>
+            {posts.length === 0 ? <p>Follow users to see their posts!</p> : <ContentList arr={posts}/>}
         </>
     );
 };

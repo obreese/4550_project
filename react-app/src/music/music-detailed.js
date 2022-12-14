@@ -88,7 +88,7 @@ const MusicDetailedComponent = () => {
                 </div>
             </div>
             <div className="row border rounded p-2 mt-3 mb-3">
-            {currentUser ? <CreatePostItem music={musicDetails}/> :
+            {currentUser ? <CreatePostItem music={musicDetails} updatePosts={getPosts}/> :
                 <Link to="/login" className="p-4 fs-3 text-black">Login to post</Link>}
             </div>
             <div className="row">
