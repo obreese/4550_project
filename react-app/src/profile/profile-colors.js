@@ -15,11 +15,6 @@ const ProfileColors = [
 
 const ProfileColorDropdown = ({currentColor, setCurrentColor}) => {
 
-
-    if (currentColor === '') setCurrentColor('#3EA4D6')
-
-
-
     return (
         <div className="dropdown">
             <button className="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown"

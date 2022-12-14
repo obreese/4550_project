@@ -16,7 +16,7 @@ const EditableProfileComponent = (profileId) => {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
-    const [currentColor, setCurrentColor] = useState(profile.currentColor);
+    const [currentColor, setCurrentColor] = useState('' + profile.currentColor);
     const dispatch = useDispatch()
 
     const loadProfile = () => {
