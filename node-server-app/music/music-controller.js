@@ -4,7 +4,7 @@ import {spotifyAuth} from '../spotify_auth/spotify-auth-controller.js';
 const SPOTIFY_BASE_URL = 'https://api.spotify.com/v1';
 
 const _formatMusicDataList = (songsDataList, albumsDataList, artistsDataList) => {
-  const formattedSongsList = Array.from(songsDataList.tracks.items.map(musicData => { 
+  const formattedSongsList = Array.from(songsDataList.tracks.items.map(musicData => {
     return {
         type: "music",
         _id: musicData.id,

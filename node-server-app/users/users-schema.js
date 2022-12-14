@@ -11,6 +11,7 @@ const usersSchema = mongoose.Schema({
     posts: {type: [String], required: true, default: []},
     followers: {type: [String], required: true, default: []},
     following: {type: [String], required: true, default: []},
+    killCount: {type: Number}
 }, {collection: 'users'})
 
 export default usersSchema
