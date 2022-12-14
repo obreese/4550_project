@@ -6,9 +6,9 @@ import {useSelector, useDispatch} from "react-redux";
 import {findUserByIdThunk} from "../user/user-thunk";
 
 const ProfileComponent = () => {
-
+    console.log("Begin profileComponent")
     const {currentUser, isAdmin, profile} = useSelector((state) => state.user)
-    let viewedId = 0;
+    let viewedId = '';
     //let viewedProfile = null
     const dispatch = useDispatch()
 
@@ -16,24 +16,15 @@ const ProfileComponent = () => {
     let myProfile = false
     if (location.length === 2 || (location.length === 3 && location[2] === '')) {
             myProfile = true
-            console.log("Passing the current id")
             viewedId = '' + currentUser._id;
             //viewedProfile = currentUser
 
     }
     else {
-        console.log("Passing the Profile Id")
         viewedId = location[2]
         //dispatch(findUserByIdThunk(location[2]))
         //viewedProfile = profile
     }
-
-
-
-    //console.log("This is being passed")
-    //console.log(viewedId)
-    //const {profile} = useSelector((state) => state.user)
-    //console.log(profile)
 
     if ((currentUser && myProfile) || (currentUser && isAdmin)) {
         return <EditableProfileComponent profileId={viewedId}/>

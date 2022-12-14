@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {deleteUserThunk, findUserByIdThunk, profileThunk, updateUserThunk} from "../user/user-thunk";
 import {findAllMusicThunk} from "../music/search-results-thunk";
 
-const EditableProfileComponent = (profileId) => {
+const EditableProfileComponent = ({ profileId }) => {
 
     const {profile} = useSelector((state) => state.user)
     const [firstName, setFirstName] = useState('');
@@ -17,11 +17,9 @@ const EditableProfileComponent = (profileId) => {
     const [currentColor, setCurrentColor] = useState('');
     const dispatch = useDispatch()
 
-
-
-    const loadProfile = () => {
+    useEffect(() => {
         dispatch(findUserByIdThunk(profileId))
-    }
+    }, [])
 
     const handleSaveButton = () => {
         const newUser = {username, firstName, lastName, email, currentColor}
@@ -106,6 +104,5 @@ const EditableProfileComponent = (profileId) => {
                 </div>
             </div>
         );
-    else loadProfile();
 };
 export default EditableProfileComponent;

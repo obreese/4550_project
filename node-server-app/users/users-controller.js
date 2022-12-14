@@ -69,12 +69,9 @@ const UsersController = (app) => {
     }
 
     const findUserById = async (req, res) => {
-        console.log(req.params)
         const uid = req.params.uid
         const user = await userDao.findUserById(uid)
-        console.log(user)
         if (user) {
-            console.log("Returning Users")
             res.json(user)
             return
         }
