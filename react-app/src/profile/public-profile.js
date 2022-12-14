@@ -5,7 +5,7 @@ import {findUserByIdThunk, updateUserThunk} from "../user/user-thunk";
 import { useLocation } from "react-router-dom";
 
 const PublicProfileComponent = ({ profileId }) => {
-    const { currentUser, profile } = useSelector((state) => state.user)
+    const { currentUser, profile, failed } = useSelector((state) => state.user)
     const dispatch = useDispatch()
     const location = useLocation()
 
@@ -27,6 +27,9 @@ const PublicProfileComponent = ({ profileId }) => {
     if (profile)
     return (
         <div className={"border rounded"}>
+            {failed && <div className="alert alert-danger" role="alert">
+                Profile not Found!
+            </div>}
             <div className="row">
                 <div className="col p-5">
                     <div className="row">
@@ -42,6 +45,13 @@ const PublicProfileComponent = ({ profileId }) => {
                     <ProfileStats user={profile} editable={false}/>
                 </div>
             </div>
+        </div>
+    );
+    else return (
+        <div>
+        {failed && <div className="alert alert-danger" role="alert">
+            Profile not Found!
+            </div>}
         </div>
     );
 };

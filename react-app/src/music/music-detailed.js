@@ -14,7 +14,7 @@ const MusicDetailedComponent = () => {
     const dispatch = useDispatch()
 
     const { currentUser } = useSelector((state) => state.user);
-    const { musicDetails, musicDetailsLoading } = useSelector((state) => state.searchResults);
+    const { musicDetails, musicDetailsLoading, failed } = useSelector((state) => state.searchResults);
 
     const [posts, setPosts] = useState([]);
 
@@ -47,7 +47,7 @@ const MusicDetailedComponent = () => {
     }
 
 
-    return (
+    if (!failed) return (
         musicDetailsLoading ? <>Loading... <FaSpinner/></> :
         <>
             <div className="row music-item rounded">
@@ -98,5 +98,9 @@ const MusicDetailedComponent = () => {
             </div> 
         </>
     );
+    else return (<div>
+        {failed && <div className="alert alert-danger" role="alert">
+        Item not Found!
+    </div>}</div>)
 };
 export default MusicDetailedComponent;

@@ -14,10 +14,11 @@ const UsersController = (app) => {
 
         const uid = req.params.uid;
         const user = req.body;
-        console.log(uid)
-        console.log(user)
+        console.log("We Updating")
+        //console.log(uid)
+        //console.log(user)
         const updatedUser = await userDao.updateUser(uid, user);
-        console.log(updatedUser)
+        //console.log(updatedUser)
         req.session['currentUser'] = updatedUser;
         res.json(updatedUser)
         return
@@ -73,18 +74,24 @@ const UsersController = (app) => {
     }
 
     const findUserById = async (req, res) => {
-        const uid = req.params.uid
-        const user = await userDao.findUserById(uid)
-        if (user) {
-            const document = {
-                ...user._doc,
-                type: 'profile_item'
+        console.log("We Finding")
+        try {
+            const uid = req.params.uid
+            const user = await userDao.findUserById(uid)
+            if (user) {
+                const document = {
+                    ...user._doc,
+                    type: 'profile_item'
+                }
+                res.json(document)
+                return
             }
-            res.json(document)
-            return
+
+            res.sendStatus(404)
+        } catch {
+            console.log("No User Man")
+            res.sendStatus(404)
         }
-        
-        res.sendStatus(404)
     }
 
     app.get('/users', findAllUsers)

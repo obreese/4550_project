@@ -52,7 +52,7 @@ const HomeComponent = () => {
     return (
         <>
             <img src="/images/logo-2.png" className="big-logo pb-3"/>
-            <input placeholder="Search People and Music"
+            <input placeholder="Search for Music and Artists"
                 className="form-control rounded-pill ps-3"
                 onKeyDown={handleKeyDown}
                 type="search"/>

@@ -48,17 +48,25 @@ const PostsController = (app) => {
     }
 
     const findPostsByMusicId = async (req, res) => {
-        const music_id = req.params.music_id
-        let posts = await postsDao.findPostsByMusicId(music_id)          
-        res.json(posts)
-        return
+        try {
+            const music_id = req.params.music_id
+            let posts = await postsDao.findPostsByMusicId(music_id)
+            res.json(posts)
+            return
+        } catch {
+            res.sendStatus(404)
+        }
     }
 
     const findPostsByUserId = async (req, res) => {
-        const uid = req.params.uid
-        let posts = await postsDao.findPostsByUserId(uid)          
-        res.json(posts)
-        return
+        try {
+            const uid = req.params.uid
+            let posts = await postsDao.findPostsByUserId(uid)
+            res.json(posts)
+            return
+        } catch {
+            res.sendStatus(404)
+        }
     }
 
     app.get('/posts/:pid', findPostById)

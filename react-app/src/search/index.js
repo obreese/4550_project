@@ -41,13 +41,16 @@ const SearchComponent = ({contentInitial = []}) => {
         }
     }
 
+    console.log(results)
+    console.log(searchTerm)
+
     return (
         <>
             <input placeholder="Search People and Music"
                 className="form-control rounded-pill ps-3"
                 onKeyDown={handleKeyDown}
                 type="search"/>
-            { results ? resultsLoading ? <>Loading... <FaSpinner/></> : <ContentList arr={results}/> : <ContentList arr={posts_json}/> } 
+            { (searchTerm != null) && results ? resultsLoading ? <>Loading... <FaSpinner/></> : <ContentList arr={results}/> : <ContentList/> }
         </>
     );
 };
