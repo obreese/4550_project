@@ -4,7 +4,7 @@ import  "react-icons/bi/index";
 import ContentList from "../list";
 import {createSearchParams, useNavigate} from "react-router-dom";
 import './index.css';
-import { findPostsByUserId } from "../posts/posts-service";
+import { findAllPosts, findPostsByUserId } from "../posts/posts-service";
 
 const HomeComponent = () => {
     const navigate = useNavigate()
@@ -13,15 +13,25 @@ const HomeComponent = () => {
 
     const [posts, setPosts] = useState([]);
 
-    const getPosts = async () => {
+    const getFollowingPosts = async () => {
         const newPosts = await Promise.all(Array.from(currentUser.following.map((uid) => findPostsByUserId(uid))))
+        newPosts.sort((post1, post2) => (post1.time > post2.time) ? 1 : -1)
 
         setPosts(newPosts.flat());
     }
 
+    const getRecentPosts = async () => {
+        const newPosts = await findAllPosts();
+        newPosts.sort((post1, post2) => (post1.time > post2.time) ? 1 : -1)
+
+        setPosts(newPosts.slice(0, 10));
+    }
+
     useEffect(() => {
         if (currentUser) {
-            getPosts();
+            getFollowingPosts();
+        } else {
+            getRecentPosts();
         }
     }, []);
 

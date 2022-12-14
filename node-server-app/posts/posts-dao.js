@@ -1,6 +1,6 @@
 import postsModel from "./posts-model.js";
 
-export const creatPost = async (post) =>
+export const createPost = async (post) =>
     await postsModel.create(post)
 
 export const deletePost = async (pid) =>
@@ -9,6 +9,9 @@ export const deletePost = async (pid) =>
 export const updatePost = async (pid, postUpdates) =>
     await postsModel.updateOne({_id: pid},
         {$set: postUpdates})
+       
+export const findAllPosts = async () =>
+    await postsModel.find();
 
 export const findPostById = async (pid) =>
     await postsModel.findById(pid)

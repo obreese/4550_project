@@ -10,6 +10,13 @@ const PostsController = (app) => {
     const updatePost = () => {}
     const deletePost = () => {}
     
+    const findAllPosts = async (req, res) => {
+        let posts = await postsDao.findAllPosts()
+    
+        res.json(posts)
+        return
+    }
+
     const findPostById = async (req, res) => {
         const pid = req.params.pid
         let post = await postsDao.findPostById(pid)
@@ -39,6 +46,7 @@ const PostsController = (app) => {
     }
 
     app.get('/posts/:pid', findPostById)
+    app.get('/posts', findAllPosts)
     app.get('/posts/byMusicId/:music_id', findPostsByMusicId)
     app.get('/posts/byUserId/:uid', findPostsByUserId)
     app.post('/posts', createPost)
