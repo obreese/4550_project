@@ -16,7 +16,7 @@ const EditableProfileComponent = (profileId) => {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
-    const [currentColor, setCurrentColor] = useState('');
+    const [currentColor, setCurrentColor] = useState(profile.currentColor);
     const dispatch = useDispatch()
 
     const loadProfile = () => {
@@ -97,9 +97,6 @@ const EditableProfileComponent = (profileId) => {
                                     <button
                                         onClick={handleSaveButton}
                                         type="button" className={"btn active"}>Save</button>
-                                </div>
-                                <div className="col-4">
-                                    <button type="button" className={"btn btn-warning"}>Request Admin</button>
                                 </div>
                                 <div className="col-5">
                                     <button
