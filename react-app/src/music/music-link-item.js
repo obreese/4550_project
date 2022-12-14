@@ -6,8 +6,12 @@ import {Link} from "react-router-dom";
 
 const MusicLinkItem = ({music}) => {
 
+    console.log(music)
+
     return (
-            <Link to={"/details/" + music.music_id} className="music-item p-2 rounded text-decoration-none">
+
+
+            <Link to={"/details?musicId=" + music._id + "&type=" + music.music_type} className="music-item p-2 rounded text-decoration-none">
                 <div className="row">
                 <div className="col pr-5 d-inline-flex align-items-center">
                     {renderIcon(music.music_type)}

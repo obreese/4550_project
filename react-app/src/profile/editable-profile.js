@@ -2,11 +2,11 @@ import React, {useEffect, useState} from "react";
 import ProfileStats from "./profile-stats";
 import ProfileColorDropdown from "./profile-colors";
 import {useDispatch, useSelector} from "react-redux";
-import {deleteUserThunk, findUserByIdThunk, updateUserThunk} from "../user/user-thunk";
+import {deleteUserThunk, findUserByIdThunk, logoutThunk, updateUserThunk} from "../user/user-thunk";
 
-const EditableProfileComponent = ({ profileId }) => {
+const EditableProfileComponent = ({ profileId, myProfile}) => {
 
-    const {profile, loading} = useSelector((state) => state.user)
+    const {profile, currentUser, loading} = useSelector((state) => state.user)
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -28,6 +28,9 @@ const EditableProfileComponent = ({ profileId }) => {
         if (newUser['email'] == "") newUser["email"] = profile.email
         if (newUser['currentColor'] == "") newUser["currentColor"] = profile.currentColor
         try {
+            console.log('id1: ' + newUserId)
+            console.log(newUser)
+
             dispatch(updateUserThunk({newUserId, newUser}))
         } catch (e) {
 
@@ -37,6 +40,15 @@ const EditableProfileComponent = ({ profileId }) => {
     const handleDeleteButton = () => {
         try {
             dispatch(deleteUserThunk(profile._id))
+            if (myProfile) {
+                dispatch(logoutThunk())
+            } else {
+                const currentUserId = '' + currentUser._id
+                const killCount = currentUser.killCount
+                const newKillCount = {killCount}
+                newKillCount.killCount += 1
+                dispatch(updateUserThunk({newUserId: currentUserId, newUser: newKillCount}))
+            }
         } catch (e) {
 
         }

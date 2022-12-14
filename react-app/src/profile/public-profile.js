@@ -2,26 +2,27 @@ import React, {useEffect} from "react";
 import ProfileStats from "./profile-stats";
 import {useDispatch, useSelector} from "react-redux";
 import {findUserByIdThunk, updateUserThunk} from "../user/user-thunk";
-import { useLocation } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const PublicProfileComponent = ({ profileId }) => {
     const { currentUser, profile } = useSelector((state) => state.user)
     const dispatch = useDispatch()
     const location = useLocation()
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(findUserByIdThunk(profileId))
     }, [location])
 
     const handleFollow = () => {
-        console.log(currentUser.following)
-        console.log(profile.followers)
-        const newCurrentFollowing = [...currentUser.following, profileId]
-        const newProfileFollowers = [...profile.followers, currentUser._id]
-        console.log(newCurrentFollowing)
-        console.log(newProfileFollowers)
-        dispatch(updateUserThunk({newUserId: currentUser._id, newUser: {following: newCurrentFollowing}}))
-        dispatch(updateUserThunk({newUserId: profile._id, newUser: {followers: newProfileFollowers}}))
+        if (currentUser) {
+            const newCurrentFollowing = [...currentUser.following, profileId]
+            const newProfileFollowers = [...profile.followers, currentUser._id]
+            dispatch(updateUserThunk({newUserId: currentUser._id, newUser: {following: newCurrentFollowing}}))
+            dispatch(updateUserThunk({newUserId: profile._id, newUser: {followers: newProfileFollowers}}))
+        } else {
+            navigate('/login')
+        }
     }
 
     if (profile)

@@ -91,7 +91,7 @@ const SignUpComponent = () => {
                         <label htmlFor="pass2-input">Confirm Password</label>
                         <input className="form-control rounded-pill ps-3" name="pass2-input" type="password"
                                onChange={(e) => setPassword2(e.target.value)} placeholder="password"></input>
-                        <label htmlFor="admin-input" className="pt-3">Pretty please make me an admin</label>
+                        <label htmlFor="admin-input" className="pt-3">Apply for Admin</label>
                         <input className="ps-3" name="admin-input" type="checkbox"
                                onChange={handleCheckBox}></input>
                     </div>

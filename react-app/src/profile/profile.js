@@ -17,7 +17,7 @@ const ProfileComponent = ({myProfile}) => {
     }
 
     if ((currentUser && myProfile) || (currentUser && currentUser.isAdmin)) {
-        return <EditableProfileComponent profileId={viewedId}/>
+        return <EditableProfileComponent profileId={viewedId} myProfile={myProfile}/>
     } else {
         return <PublicProfileComponent profileId={viewedId}/>
     }
