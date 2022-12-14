@@ -28,6 +28,9 @@ const ProfileComponent = () => {
         //viewedProfile = profile
     }
 
+    console.log("Deciding Views: Am I an admin?")
+    console.log(isAdmin)
+
 
 
     //console.log("This is being passed")

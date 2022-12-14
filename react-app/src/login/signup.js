@@ -17,7 +17,7 @@ const SignUpComponent = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
-    const [admin, setAdmin] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
     const [currentColor, setCurrentColor] = useState('#3EA4D6');
 
     const {currentUser} = useSelector((state) => state.user)
@@ -26,6 +26,10 @@ const SignUpComponent = () => {
 
     if(currentUser) {
         return (<Navigate to={'/profile'}/>)
+    }
+
+    const handleCheckBox = () => {
+        setIsAdmin(!isAdmin)
     }
 
     const handleSignUp = () => {
@@ -46,7 +50,9 @@ const SignUpComponent = () => {
             return
         }
         else {
-            dispatch(registerThunk({username, password, firstName, lastName, email, currentColor, admin}))
+            console.log("Are you an admin")
+            console.log(isAdmin)
+            dispatch(registerThunk({username, password, firstName, lastName, email, currentColor, isAdmin}))
         }
     }
 
@@ -88,7 +94,7 @@ const SignUpComponent = () => {
                            onChange={(e) => setPassword2(e.target.value)} placeholder="password"></input>
                     <label htmlFor="admin-input" className="pt-3">Pretty please make me an admin</label>
                     <input className="ps-3" name="admin-input" type="checkbox"
-                           onChange={(e) => setAdmin(e.target.value)}></input>
+                           onChange={handleCheckBox}></input>
                 </div>
             </div>
             <ul className="nav nav-pills mb-2 p-3">

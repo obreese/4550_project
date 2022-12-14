@@ -35,13 +35,22 @@ const userReducer = createSlice({
             state.currentUser = null
         },
         [profileThunk.fulfilled]: (state, action) => {
+            console.log("It is I who am messing with your day")
             state.currentUser = action.payload
         },
         [registerThunk.fulfilled]: (state, action) => {
             state.currentUser = action.payload
         },
+        [registerThunk.rejected]: (state, action) => {
+            alert("Username not Available!!!")
+            state.currentUser = null
+        },
         [loginThunk.fulfilled]: (state, action) => {
             state.currentUser = action.payload
+        },
+        [loginThunk.rejected]: (state, action) => {
+            alert("Username/Password Pair is Incorrect!")
+            state.currentUser = null
         }
     }
 })
