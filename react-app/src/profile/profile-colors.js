@@ -13,13 +13,13 @@ const ProfileColors = [
     "#9D60CD"
 ]
 
-const ProfileColorDropdown = ({currentColor, setCurrentColor}) => {
+const ProfileColorDropdown = ({defaultColor, currentColor, setCurrentColor}) => {
 
     return (
         <div className="dropdown">
             <button className="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
-                <div className="profile-color" style={{backgroundColor: currentColor}}></div>
+                <div className="profile-color" style={{backgroundColor: currentColor === '' ? defaultColor : currentColor}}></div>
             </button>
             <ul className="dropdown-menu">
                 {ProfileColors.map(color => <li key={color} onClick={() => setCurrentColor(color)}><a
