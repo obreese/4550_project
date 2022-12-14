@@ -93,7 +93,7 @@ const SignUpComponent = () => {
             </div>
             <ul className="nav nav-pills mb-2 p-3">
                 <li className="nav-item">
-                    <Link to="/login" className="nav-link">Login</Link>
+                    <Link to="/login" className="nav-link text-black">Login</Link>
                 </li>
                 <li className="nav-item">
                     <button onClick={handleSignUp} className="nav-link active">Sign Up</button>

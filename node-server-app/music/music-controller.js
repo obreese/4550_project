@@ -40,13 +40,14 @@ const _formatMusicDataList = (songsDataList, albumsDataList, artistsDataList) =>
 }
 
 const _formatMusicDetails = (musicData, type) => {
+
+
+    console.log(musicData)
     let formattedMusicDetails = {
         type: "music_detailed",
         _id: musicData.id,
         music_type: type,
     }
-
-    console.log(musicData)
 
     if (type === 'artist') {
         return {
@@ -61,7 +62,8 @@ const _formatMusicDetails = (musicData, type) => {
             album: musicData.name,
             artist: musicData.artists[0].name,
             image: musicData.images[0].url,
-            extra_info: musicData.total_tracks + ' songs',
+            extra_info: musicData.total_tracks + ' songs'
+
         }
     } else {
         return {
@@ -70,7 +72,7 @@ const _formatMusicDetails = (musicData, type) => {
             album: musicData.album.name,
             artist: musicData.artists[0].name,
             image: musicData.album.images[0].url,
-            extra_info: musicData.explicit ? 'Not safe for children' : 'Safe for children',
+            extra_info: musicData.explicit ? 'Not safe for kids' : 'Safe for kids',
         }
     }
 }
