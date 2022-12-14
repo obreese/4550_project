@@ -57,11 +57,12 @@ const MusicDetailedComponent = () => {
                             <div className={`col ${musicDetails.music_type === 'track' && "fs-3"} music-text`}>{musicDetails.song}</div>
                         </div>
                     }
-                    {musicDetails.genres &&
-                    <div className="row  mt-2 mb-2">
-                        <div className=" genre-box rounded-3">{musicDetails.genres.map(genre => ' ' + genre).join()}</div>
-                    </div>
-                    }
+                    {musicDetails.extra_info &&
+                    <div className="row ml-5 mt-2 mb-2">
+                        <div className="col">
+                            <div className="p-1 info-box rounded-3">{musicDetails.extra_info}</div>
+                        </div>
+                    </div>}
                 </div>
                 <div className="col-3">
                     <img className="p-2" alt="album cover" height={130} src={

@@ -20,10 +20,13 @@
     text-overflow: ellipsis;
 }
 
-.genre-box {
+.info-box {
     background-color: white;
     color: var(--green) !important;
     width: fit-content !important;
     block-size: fit-content !important;
-    min-width: 200px !important;
+    max-width: 300px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

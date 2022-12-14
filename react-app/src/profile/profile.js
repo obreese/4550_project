@@ -3,7 +3,6 @@ import {useLocation} from "react-router-dom";
 import PublicProfileComponent from "./public-profile";
 import EditableProfileComponent from "./editable-profile";
 import {useSelector, useDispatch} from "react-redux";
-import {findProfileByIdThunk} from "./profile-thunk";
 import {findUserByIdThunk} from "../user/user-thunk";
 
 const ProfileComponent = () => {

@@ -4,7 +4,7 @@ import {profile_json} from "../json_examples";
 import {useDispatch, useSelector} from "react-redux";
 import {findUserByIdThunk} from "../user/user-thunk";
 
-const PublicProfileComponent = ({profileid}) => {
+const PublicProfileComponent = ({profileId = ""}) => {
 
     const dispatch = useDispatch();
 
