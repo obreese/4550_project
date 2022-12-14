@@ -1,6 +1,5 @@
 import React, {useEffect} from "react";
 import ProfileStats from "./profile-stats";
-import {profile_json} from "../json_examples";
 import {useDispatch, useSelector} from "react-redux";
 import {findUserByIdThunk} from "../user/user-thunk";
 

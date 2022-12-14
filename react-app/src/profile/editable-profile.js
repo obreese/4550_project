@@ -1,11 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
 import ProfileStats from "./profile-stats";
-import {editable_profile_json} from "../json_examples";
 import ProfileColorDropdown from "./profile-colors";
 import {useDispatch, useSelector} from "react-redux";
-import {deleteUserThunk, findUserByIdThunk, profileThunk, updateUserThunk} from "../user/user-thunk";
-import {findAllMusicThunk} from "../music/search-results-thunk";
+import {deleteUserThunk, findUserByIdThunk, updateUserThunk} from "../user/user-thunk";
 
 const EditableProfileComponent = ({ profileId }) => {
 
@@ -44,7 +41,7 @@ const EditableProfileComponent = ({ profileId }) => {
 
         }
     }
-       return (  loading ? 'loading' :
+       return (loading || !profile ? 'loading' :
                 <div className={"border rounded"}>
                     <div className="row">
                         <div className="col p-5">
