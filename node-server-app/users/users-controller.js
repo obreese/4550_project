@@ -76,6 +76,11 @@ const UsersController = (app) => {
         if (user) {
             console.log("Returning Users")
             res.json(user)
+            const document = {
+                ...user._doc,
+                type: 'profile_item'
+            }
+            res.json(document)
             return
         }
         res.sendStatus(404)

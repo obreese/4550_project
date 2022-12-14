@@ -6,6 +6,7 @@ import {findUserByIdThunk} from "../user/user-thunk";
 
 const PublicProfileComponent = (profileId) => {
 
+
     console.log("Received Thus")
     console.log(profileId["profileId"])
 

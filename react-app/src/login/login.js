@@ -4,7 +4,7 @@ import "./index.css"
 import {Link} from "react-router-dom";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Navigate, useNavigate} from "react-router";
+import {Navigate} from "react-router";
 import {loginThunk} from "./../user/user-thunk";
 
 const LoginComponent = () => {
@@ -12,7 +12,6 @@ const LoginComponent = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     const handleLoginBtn = () => {
         try {
             dispatch(loginThunk({username, password}));
@@ -29,10 +28,10 @@ const LoginComponent = () => {
         <div className={"border rounded"}>
     <div className="row rounded">
         <div className="col p-5">
-        <p>Email</p>
+        <p>Username</p>
         <input
             onChange={(e) => setUsername(e.target.value)}
-            className="form-control rounded-pill ps-3 mb-5" type="email" placeholder="artist@music.com"></input>
+            className="form-control rounded-pill ps-3 mb-5" type="text" placeholder="username"></input>
         <p>Password</p>
         <input
             onChange={(e) => setPassword(e.target.value)}

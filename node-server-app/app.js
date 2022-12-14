@@ -5,10 +5,10 @@ import session from 'express-session'
 import { spotifyAuth } from './spotify_auth/spotify-auth-controller.js';
 import mongoose from "mongoose";
 import UsersController from "./users/users-controller.js";
+import PostsController from './posts/posts-controller.js';
 
 const CONNECTION_STRING = process.env.DB_CONNECTION_STRING
     || 'mongodb://127.0.0.1:27017/goodlistensdb';
-
 
 const options = {
     useNewUrlParser: true,
@@ -20,13 +20,9 @@ const options = {
     family: 4
 }
 
-
 mongoose.connect(CONNECTION_STRING, options);
 
-
-
 const app = express();
-// app.use(cors());
 app.use(express.json());
 
 app.use(cors({
@@ -44,6 +40,7 @@ app.use(session({
 await spotifyAuth();
 
 MusicController(app);
-UsersController(app)
+UsersController(app);
+PostsController(app);
 
 app.listen(4000)

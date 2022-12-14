@@ -17,6 +17,7 @@ const SignUpComponent = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
+    const [admin, setAdmin] = useState(false);
     const [currentColor, setCurrentColor] = useState('#3EA4D6');
 
     const {currentUser} = useSelector((state) => state.user)
@@ -45,7 +46,7 @@ const SignUpComponent = () => {
             return
         }
         else {
-            dispatch(registerThunk({username, password, firstName, lastName, email, currentColor}))
+            dispatch(registerThunk({username, password, firstName, lastName, email, currentColor, admin}))
         }
     }
 
@@ -85,11 +86,14 @@ const SignUpComponent = () => {
                     <label htmlFor="pass2-input">Confirm Password</label>
                     <input className="form-control rounded-pill ps-3" name="pass2-input" type="password"
                            onChange={(e) => setPassword2(e.target.value)} placeholder="password"></input>
+                    <label htmlFor="admin-input" className="pt-3">Pretty please make me an admin</label>
+                    <input className="ps-3" name="admin-input" type="checkbox"
+                           onChange={(e) => setAdmin(e.target.value)}></input>
                 </div>
             </div>
             <ul className="nav nav-pills mb-2 p-3">
                 <li className="nav-item">
-                    <Link to="/login" className="nav-link">Login</Link>
+                    <Link to="/login" className="nav-link text-black">Login</Link>
                 </li>
                 <li className="nav-item">
                     <button onClick={handleSignUp} className="nav-link active">Sign Up</button>

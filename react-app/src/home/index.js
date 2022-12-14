@@ -1,14 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import  "react-icons/bi/index";
 import ContentList from "../list";
-import {musics_json, posts_json, profile_items_json} from "../json_examples";
-import {createSearchParams, useLocation, useNavigate} from "react-router-dom";
+import {createSearchParams, useNavigate} from "react-router-dom";
 import './index.css';
+import { findAllPosts, findPostsByUserId } from "../posts/posts-service";
 
-// TODO get posts from user
-
-const HomeComponent = ({contentInitial = []}) => {
+const HomeComponent = () => {
     const navigate = useNavigate()
+
+    const { currentUser } = useSelector((state) => state.user);
+
+    const [posts, setPosts] = useState([]);
+
+    const getFollowingPosts = async () => {
+        const newPosts = await Promise.all(Array.from(currentUser.following.map((uid) => findPostsByUserId(uid))))
+        newPosts.sort((post1, post2) => (post1.time > post2.time) ? 1 : -1)
+
+        setPosts(newPosts.flat());
+    }
+
+    const getRecentPosts = async () => {
+        const newPosts = await findAllPosts();
+        newPosts.sort((post1, post2) => (post1.time > post2.time) ? 1 : -1)
+
+        setPosts(newPosts.slice(0, 10));
+    }
+
+    useEffect(() => {
+        if (currentUser) {
+            getFollowingPosts();
+        } else {
+            getRecentPosts();
+        }
+    }, []);
+
     const handleKeyDown = (event) => {
         const searchTerm = event.target.value;
         if (event.key === 'Enter' && searchTerm !== "") {
@@ -26,7 +52,7 @@ const HomeComponent = ({contentInitial = []}) => {
                 className="form-control rounded-pill ps-3"
                 onKeyDown={handleKeyDown}
                 type="search"/>
-            <ContentList arr={posts_json}/>
+            <ContentList arr={posts}/>
         </>
     );
 };

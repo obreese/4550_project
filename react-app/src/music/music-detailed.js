@@ -1,14 +1,14 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch} from "react-redux";
 import "react-icons/bi/index"
 import {renderIcon} from "./music-icon";
 import {TiArrowForward} from "react-icons/ti"
-import ContentList from "../list";
 import CreatePostItem from "../posts/create-post-item"
 import {Link} from "react-router-dom";
-import {music_detailed_json} from "../json_examples";
 import { findMusicDetailsByIdThunk } from "./search-results-thunk";
 import { FaSpinner } from "react-icons/fa";
+import { findPostsByMusicId } from "../posts/posts-service";
+import ContentList from "../list";
 
 const MusicDetailedComponent = () => {
     const dispatch = useDispatch()
@@ -16,10 +16,15 @@ const MusicDetailedComponent = () => {
     const { currentUser } = useSelector((state) => state.user);
     const { musicDetails, musicDetailsLoading } = useSelector((state) => state.searchResults);
 
+    const [posts, setPosts] = useState([]);
+
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 
-
+    const getPosts = async (music_id) => {
+        const newPosts = await findPostsByMusicId(music_id);
+        setPosts(newPosts);
+    }
 
     useEffect(() => {
         const findMusicDetailsParams = {
@@ -28,6 +33,12 @@ const MusicDetailedComponent = () => {
         }
         dispatch(findMusicDetailsByIdThunk(findMusicDetailsParams))
     }, [])
+
+    useEffect(() => {
+        if (musicDetails?._id) {
+            getPosts(musicDetails._id);
+        }
+    }, [musicDetails])
 
     let spotifyLink = "";
     if (musicDetails) {
@@ -57,11 +68,12 @@ const MusicDetailedComponent = () => {
                             <div className={`col ${musicDetails.music_type === 'track' && "fs-3"} music-text`}>{musicDetails.song}</div>
                         </div>
                     }
-                    {musicDetails.genres &&
-                    <div className="row  mt-2 mb-2">
-                        <div className=" genre-box rounded-3">{musicDetails.genres.map(genre => ' ' + genre).join()}</div>
-                    </div>
-                    }
+                    {musicDetails.extra_info &&
+                    <div className="row ml-5 mt-2 mb-2">
+                        <div className="col">
+                            <div className="p-1 info-box rounded-3">{musicDetails.extra_info}</div>
+                        </div>
+                    </div>}
                 </div>
                 <div className="col-3">
                     <img className="p-2" alt="album cover" height={130} src={
@@ -80,8 +92,8 @@ const MusicDetailedComponent = () => {
                 <Link to="/login" className="p-4 fs-3 text-black">Login to post</Link>}
             </div>
             <div className="row">
-            {/* <ContentList arr={music.posts}/> todo uncomment */}
-            {/* {loggedIn && music.posts.length === 0 && "Be the first to post"} */}
+            {posts.length >= 0 && <ContentList arr={posts}/>}
+            {currentUser && posts.length === 0 && "Be the first to post"}
             </div> 
         </>
     );
