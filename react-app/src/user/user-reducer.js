@@ -17,31 +17,43 @@ const userReducer = createSlice({
         currentUser: undefined,
         isAdmin: false,
         loading: false,
+        failed: false,
         profile: null
     },
     extraReducers: {
         [updateUserThunk.fulfilled]: (state, action) => {
+            state.failed = false
             state.currentUser = action.payload
         },
         [deleteUserThunk.fulfilled]: (state, action) => {
+            state.failed = false
             state.currentUser = null
         },
         [findUserByIdThunk.fulfilled]: (state, action) => {
-            console.log("Got the User By ID")
-            console.log(action.payload)
+            state.failed = false
             state.profile = action.payload
         },
         [logoutThunk.fulfilled]: (state, action) => {
+            state.failed = false
             state.currentUser = null
         },
         [profileThunk.fulfilled]: (state, action) => {
+            state.failed = false
             state.currentUser = action.payload
         },
         [registerThunk.fulfilled]: (state, action) => {
+            state.failed = false
             state.currentUser = action.payload
         },
+        [registerThunk.rejected]: (state, action) => {
+            state.failed = true
+        },
         [loginThunk.fulfilled]: (state, action) => {
+            state.failed = false
             state.currentUser = action.payload
+        },
+        [loginThunk.rejected]: (state, action) => {
+            state.failed = true
         }
     }
 })
