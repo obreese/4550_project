@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PostItem from "../posts/post-item";
 import MusicItem from "../music/music-item";
 import ProfileItem from "../profile/profile-item"

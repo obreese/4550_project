@@ -76,9 +76,14 @@ const UsersController = (app) => {
         const uid = req.params.uid
         const user = await userDao.findUserById(uid)
         if (user) {
-            res.json(user)
+            const document = {
+                ...user._doc,
+                type: 'profile_item'
+            }
+            res.json(document)
             return
         }
+        
         res.sendStatus(404)
     }
 

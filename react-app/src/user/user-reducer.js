@@ -2,10 +2,9 @@ import {createSlice} from "@reduxjs/toolkit";
 
 import {
     deleteUserThunk,
-    findAllUsersThunk,
     findUserByIdThunk,
     loginThunk,
-    logoutThunk, profileColorThunk,
+    logoutThunk,
     profileThunk,
     registerThunk,
     updateUserThunk
