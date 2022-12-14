@@ -15,13 +15,15 @@ const PublicProfileComponent = ({ profileId }) => {
     }, [location])
 
     const handleFollow = () => {
-        if (currentUser) {
-            const newCurrentFollowing = [...currentUser.following, profileId]
-            const newProfileFollowers = [...profile.followers, currentUser._id]
-            dispatch(updateUserThunk({newUserId: currentUser._id, newUser: {following: newCurrentFollowing}}))
-            dispatch(updateUserThunk({newUserId: profile._id, newUser: {followers: newProfileFollowers}}))
-        } else {
-            navigate('/login')
+        if (profile._id !== currentUser._id) {
+            if (currentUser) {
+                const newCurrentFollowing = [...currentUser.following, profileId]
+                const newProfileFollowers = [...profile.followers, currentUser._id]
+                dispatch(updateUserThunk({newUserId: currentUser._id, newUser: {following: newCurrentFollowing}}))
+                dispatch(updateUserThunk({newUserId: profile._id, newUser: {followers: newProfileFollowers}}))
+            } else {
+                navigate('/login')
+            }
         }
     }
 

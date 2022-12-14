@@ -11,7 +11,7 @@ const EditPostItem = ({post}) => {
     const dispatch = useDispatch()
 
     const [body, setBody] = useState("");
-    const { currentUser } = useSelector((state) => state.user);
+    const { profile } = useSelector((state) => state.user);
 
     useEffect(() => {
         updateTextArea()
@@ -34,8 +34,8 @@ const EditPostItem = ({post}) => {
 
     const handleDelete = async () => {
         await deletePost(post._id);
-        const newUser = {posts: currentUser.posts.filter((p) => p !== post._id)};
-        dispatch(updateUserThunk({newUserId: currentUser._id, newUser}));
+        const newUser = {posts: profile.posts.filter((p) => p !== post._id)};
+        dispatch(updateUserThunk({newUserId: profile._id, newUser}));
     }
 
     return (

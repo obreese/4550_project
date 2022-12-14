@@ -9,7 +9,7 @@ const CreatePostItem = ({music, updatePosts}) => {
     const dispatch = useDispatch()
 
     const [body, setBody] = useState("");
-    const { currentUser } = useSelector((state) => state.user);
+    const { profile } = useSelector((state) => state.user);
 
     const handleKeyDown = (e) => {
         e.target.style.height = 'inherit';
@@ -20,16 +20,16 @@ const CreatePostItem = ({music, updatePosts}) => {
     const handlePost = async () => {
         const newPost = {
             type: 'post',
-            fname: currentUser.firstName,
-            lname: currentUser.lastName,
-            username: currentUser.username,
-            user_id: currentUser._id,
+            fname: profile.firstName,
+            lname: profile.lastName,
+            username: profile.username,
+            user_id: profile._id,
             music,
             body,
         }
         const createdPost = await createPost(newPost);
-        const newUser = {posts: [...currentUser.posts, createdPost._id]};
-        dispatch(updateUserThunk({newUserId: currentUser._id, newUser}));
+        const newUser = {posts: [...profile.posts, createdPost._id]};
+        dispatch(updateUserThunk({newUserId: profile._id, newUser}));
         updatePosts(music._id);
     }
 

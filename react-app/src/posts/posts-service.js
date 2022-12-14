@@ -1,5 +1,4 @@
 import axios from "axios";
-import { findUserById, updateUser } from "../user/user-service";
 
 const POST_API_URL = 'http://localhost:4000/posts'
 
@@ -16,12 +15,6 @@ export const updatePost = async (postData) => {
 }
 
 export const deletePost = async (pid) => {
-    // const oldPost = await findPostById(pid)
-    // const response = await api.delete(`${POST_API_URL}/${pid}`)
-    // const post = response.data
-    // const user = await findUserById(oldPost.user_id);
-    // await updateUser({newUserId: oldPost.user_id, newUser: { posts: user.posts.filter((p) => p !== oldPost._id) }})
-    // return post
     const response = await api.delete(`${POST_API_URL}/${pid}`)
     const post = response.data
     return post

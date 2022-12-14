@@ -8,7 +8,7 @@ import { deletePost } from "../posts/posts-service";
 
 const EditableProfileComponent = ({ profileId, myProfile}) => {
 
-    const {profile, currentUser, loading} = useSelector((state) => state.user)
+    const {profile, loading} = useSelector((state) => state.user)
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -38,12 +38,11 @@ const EditableProfileComponent = ({ profileId, myProfile}) => {
 
     const handleDeleteButton = async () => {
         try {
-            // dispatch(deleteUserThunk(profile._id))
             if (myProfile) {
                 dispatch(logoutThunk())
             } else {
-                const currentUserId = '' + currentUser._id
-                const killCount = currentUser.killCount
+                const currentUserId = '' + profile._id
+                const killCount = profile.killCount
                 const newKillCount = {killCount}
                 newKillCount.killCount += 1
                 dispatch(updateUserThunk({newUserId: currentUserId, newUser: newKillCount}))
