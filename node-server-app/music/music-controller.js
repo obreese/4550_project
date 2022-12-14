@@ -4,37 +4,37 @@ import {spotifyAuth} from '../spotify_auth/spotify-auth-controller.js';
 const SPOTIFY_BASE_URL = 'https://api.spotify.com/v1';
 
 const _formatMusicDataList = (songsDataList, albumsDataList, artistsDataList) => {
-    const formattedSongsList = Array.from(songsDataList.tracks.items.map(musicData => {
-        return {
-            type: "music",
-            _id: musicData.id,
-            music_type: "song",
-            song: musicData.name,
-            album: musicData.album.name,
-            artist: musicData.artists.map(artist => artist.name).join(', '),
-            image: musicData.album.images[0].url,
-        }
-    }).values()).slice(0, 5);
-    const formattedAlbumsList = Array.from(albumsDataList.albums.items.map(musicData => {
-        return {
-            type: "music",
-            _id: musicData.id,
-            music_type: "album",
-            album: musicData.name,
-            artist: musicData.artists.map(artist => artist.name).join(', '),
-            image: musicData.images[0].url,
-        }
-    }).values()).slice(0, 5);
-    const formattedArtistsList = Array.from(artistsDataList.artists.items.map(musicData => {
-        return {
-            type: "music",
-            _id: musicData.id,
-            music_type: "artist",
-            song: musicData.name,
-            artist: musicData.name,
-            image: musicData.images[0]?.url,
-        }
-    }).values()).slice(0, 5);
+  const formattedSongsList = Array.from(songsDataList.tracks.items.map(musicData => { 
+    return {
+        type: "music",
+        _id: musicData.id,
+        music_type: "track",
+        song: musicData.name,
+        album: musicData.album.name,
+        artist: musicData.artists.map(artist => artist.name).join(', '),
+        image: musicData.album.images[0].url,
+    }
+  }).values()).slice(0, 5);
+  const formattedAlbumsList = Array.from(albumsDataList.albums.items.map(musicData => { 
+    return {
+        type: "music",
+        _id: musicData.id,
+        music_type: "album",
+        album: musicData.name,
+        artist: musicData.artists.map(artist => artist.name).join(', '),
+        image: musicData.images[0].url,
+    }
+  }).values()).slice(0, 5);
+  const formattedArtistsList = Array.from(artistsDataList.artists.items.map(musicData => {
+    return {
+        type: "music",
+        _id: musicData.id,
+        music_type: "artist",
+        song: musicData.name,
+        artist: musicData.name, 
+        image: musicData.images[0]?.url,
+    }
+  }).values()).slice(0, 5);
 
     return [...formattedSongsList, ...formattedAlbumsList, ...formattedArtistsList]
 }
