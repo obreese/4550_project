@@ -5,20 +5,17 @@ import EditableProfileComponent from "./editable-profile";
 import {useSelector, useDispatch} from "react-redux";
 import {findUserByIdThunk} from "../user/user-thunk";
 
-const ProfileComponent = () => {
+const ProfileComponent = ({myProfile}) => {
     console.log("Begin profileComponent")
-    const {currentUser, isAdmin, profile} = useSelector((state) => state.user)
+    const {currentUser, profile} = useSelector((state) => state.user)
     let viewedId = '';
     //let viewedProfile = null
     const dispatch = useDispatch()
 
     let location = useLocation().pathname.split("/")
-    let myProfile = false
     if (location.length === 2 || (location.length === 3 && location[2] === '')) {
-            myProfile = true
             viewedId = '' + currentUser._id;
             //viewedProfile = currentUser
-
     }
     else {
         viewedId = location[2]
@@ -26,7 +23,7 @@ const ProfileComponent = () => {
         //viewedProfile = profile
     }
 
-    if ((currentUser && myProfile) || (currentUser && isAdmin)) {
+    if ((currentUser && myProfile) || (currentUser && currentUser.isAdmin)) {
         return <EditableProfileComponent profileId={viewedId}/>
     } else {
         return <PublicProfileComponent profileId={viewedId}/>

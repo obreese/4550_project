@@ -41,10 +41,10 @@ function App() {
                                     <Route path="/details/*" element={<MusicDetailedComponent/>}/>
                                     <Route path="/profile" element={
                                         <ProtectedRoute>
-                                        <ProfileComponent/>
+                                        <ProfileComponent myProfile={true}/>
                                         </ProtectedRoute>
                                     }/>
-                                    <Route path="/profile/:profile_id" element={ <ProfileComponent/> }/>
+                                    <Route path="/profile/:profile_id" element={ <ProfileComponent myProfile={false}/> }/>
                                     <Route path="/login" element={<LoginComponent/>}/>
                                     <Route path="/register" element={<SignUpComponent/>}/>
                                     <Route path="/logout" element={<LogoutComponent/>}/>

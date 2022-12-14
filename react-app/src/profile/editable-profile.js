@@ -9,7 +9,7 @@ import {findAllMusicThunk} from "../music/search-results-thunk";
 
 const EditableProfileComponent = ({ profileId }) => {
 
-    const {profile} = useSelector((state) => state.user)
+    const {profile, loading} = useSelector((state) => state.user)
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -19,7 +19,8 @@ const EditableProfileComponent = ({ profileId }) => {
 
     useEffect(() => {
         dispatch(findUserByIdThunk(profileId))
-    }, [])
+    }, [profileId])
+
 
     const handleSaveButton = () => {
         const newUser = {username, firstName, lastName, email, currentColor}
@@ -43,66 +44,71 @@ const EditableProfileComponent = ({ profileId }) => {
 
         }
     }
-
-    if (profile) return (
-            <div className={"border rounded"}>
-                <div className="row">
-                    <div className="col p-5">
-                        <div className="row pb-5">
-                            <div className="col p-5">
-                                <div className="row">
-                                    <div className="col">
-                                        <label htmlFor="fname-input">First Name</label>
-                                        <input
-                                            defaultValue={profile.firstName}
-                                            onChange={(e) => setFirstName(e.target.value)}
-                                            className="form-control rounded-pill ps-3" name="fname-input"
-                                            type="text" />
+       return (  loading ? 'loading' :
+                <div className={"border rounded"}>
+                    <div className="row">
+                        <div className="col p-5">
+                            <div className="row pb-5">
+                                <div className="col p-5">
+                                    <div className="row">
+                                        <div className="col">
+                                            <label htmlFor="fname-input">First Name</label>
+                                            <input
+                                                defaultValue={profile.firstName}
+                                                onChange={(e) => setFirstName(e.target.value)}
+                                                className="form-control rounded-pill ps-3" name="fname-input"
+                                                type="text"/>
+                                        </div>
+                                        <div className="col">
+                                            <label htmlFor="lname-input">Last Name</label>
+                                            <input
+                                                onChange={(e) => setLastName(e.target.value)}
+                                                className="form-control rounded-pill ps-3 mb-3" name="lname-input"
+                                                type="text" defaultValue={profile.lastName}/>
+                                        </div>
                                     </div>
-                                    <div className="col">
-                                        <label htmlFor="lname-input">Last Name</label>
-                                        <input
-                                            onChange={(e) => setLastName(e.target.value)}
-                                            className="form-control rounded-pill ps-3 mb-3" name="lname-input"
-                                            type="text" defaultValue={profile.lastName}/>
+                                    <label htmlFor="email-input">Email</label>
+                                    <input
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        className="form-control rounded-pill ps-3 mb-3" name="email-input" type="email"
+                                        placeholder="artist@music.com" defaultValue={profile.email}/>
+                                    <div className="row">
+                                        <div className="col">
+                                            <label htmlFor="user-input">Username</label>
+                                            <input
+                                                onChange={(e) => setUsername(e.target.value)}
+                                                className="form-control rounded-pill ps-3 mb-3" name="user-input"
+                                                type="text"
+                                                defaultValue={profile.username}></input>
+                                        </div>
+                                        <div className="col-3">
+                                            <label>Color</label>
+                                            <ProfileColorDropdown defaultColor={profile.currentColor}
+                                                                  currentColor={currentColor}
+                                                                  setCurrentColor={setCurrentColor}/>
+                                        </div>
                                     </div>
-                                </div>
-                                <label htmlFor="email-input">Email</label>
-                                <input
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="form-control rounded-pill ps-3 mb-3" name="email-input" type="email"
-                                    placeholder="artist@music.com" defaultValue={profile.email}/>
-                                <div className="row">
-                                    <div className="col">
-                                        <label htmlFor="user-input">Username</label>
-                                        <input
-                                            onChange={(e) => setUsername(e.target.value)}
-                                            className="form-control rounded-pill ps-3 mb-3" name="user-input" type="text"
-                                            defaultValue={profile.username}></input>
-                                    </div>
-                                    <div className="col-3">
-                                        <label>Color</label>
-                                        <ProfileColorDropdown defaultColor={profile.currentColor} currentColor={currentColor} setCurrentColor={setCurrentColor}/>
-                                    </div>
-                                </div>
-                                <div className="row pt-3">
-                                    <div className="col-3">
-                                        <button
-                                            onClick={handleSaveButton}
-                                            type="button" className={"btn active"}>Save</button>
-                                    </div>
-                                    <div className="col-5">
-                                        <button
-                                            onClick={handleDeleteButton}
-                                            type="button" className={"btn btn-danger"}>Delete Account</button>
+                                    <div className="row pt-3">
+                                        <div className="col-3">
+                                            <button
+                                                onClick={handleSaveButton}
+                                                type="button" className={"btn active"}>Save
+                                            </button>
+                                        </div>
+                                        <div className="col-5">
+                                            <button
+                                                onClick={handleDeleteButton}
+                                                type="button" className={"btn btn-danger"}>Delete Account
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <ProfileStats user={profile} editable={true}/>
                         </div>
-                        <ProfileStats user={profile} editable={true}/>
                     </div>
                 </div>
-            </div>
-        );
+       )
+        ;
 };
 export default EditableProfileComponent;
