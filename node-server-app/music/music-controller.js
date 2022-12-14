@@ -40,9 +40,6 @@ const _formatMusicDataList = (songsDataList, albumsDataList, artistsDataList) =>
 }
 
 const _formatMusicDetails = (musicData, type) => {
-
-
-    console.log(musicData)
     let formattedMusicDetails = {
         type: "music_detailed",
         _id: musicData.id,
