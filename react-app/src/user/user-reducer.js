@@ -27,6 +27,8 @@ const userReducer = createSlice({
             state.currentUser = null
         },
         [findUserByIdThunk.fulfilled]: (state, action) => {
+            console.log("Got the User By ID")
+            console.log(action.payload)
             state.profile = action.payload
         },
         [logoutThunk.fulfilled]: (state, action) => {

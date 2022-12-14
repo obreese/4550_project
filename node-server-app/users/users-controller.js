@@ -69,14 +69,13 @@ const UsersController = (app) => {
     }
 
     const findUserById = async (req, res) => {
+        console.log(req.params)
         const uid = req.params.uid
         const user = await userDao.findUserById(uid)
+        console.log(user)
         if (user) {
-            const document = {
-                ...user._doc,
-                type: 'profile_item'
-            }
-            res.json(document)
+            console.log("Returning Users")
+            res.json(user)
             return
         }
         res.sendStatus(404)
