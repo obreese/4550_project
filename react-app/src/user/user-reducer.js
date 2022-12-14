@@ -23,7 +23,7 @@ const userReducer = createSlice({
     extraReducers: {
         [updateUserThunk.fulfilled]: (state, action) => {
             state.failed = false
-            state.currentUser = action.payload
+            state.profile = action.payload
         },
         [deleteUserThunk.fulfilled]: (state, action) => {
             state.failed = false
