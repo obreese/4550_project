@@ -17,7 +17,11 @@ const HomeComponent = () => {
         const newPosts = await Promise.all(Array.from(currentUser.following.map((uid) => findPostsByUserId(uid))))
         newPosts.sort((post1, post2) => (post1.time < post2.time) ? 1 : -1)
 
-        setPosts(newPosts.flat());
+        if (newPosts) {
+            setPosts(newPosts.flat());
+        } else {
+            getRecentPosts();
+        }
     }
 
     const getRecentPosts = async () => {

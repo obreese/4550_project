@@ -2,14 +2,16 @@ import React, {useEffect} from "react";
 import ProfileStats from "./profile-stats";
 import {useDispatch, useSelector} from "react-redux";
 import {findUserByIdThunk, updateUserThunk} from "../user/user-thunk";
+import { useLocation } from "react-router-dom";
 
 const PublicProfileComponent = ({ profileId }) => {
     const { currentUser, profile } = useSelector((state) => state.user)
     const dispatch = useDispatch()
+    const location = useLocation()
 
     useEffect(() => {
         dispatch(findUserByIdThunk(profileId))
-    }, [])
+    }, [location])
 
     const handleFollow = () => {
         console.log(currentUser.following)
