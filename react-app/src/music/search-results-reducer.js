@@ -17,6 +17,7 @@ const searchResultsReducer = createSlice({
     extraReducers: {
         [findAllMusicThunk.pending]: (state, action) => {
             state.resultsLoading = true;
+            state.failed = false;
         },
         [findAllMusicThunk.fulfilled]: (state, action) => {
             state.resultsLoading = false;
@@ -29,6 +30,7 @@ const searchResultsReducer = createSlice({
         },
         [findMusicDetailsByIdThunk.pending]: (state, action) => {
             state.musicDetailsLoading = true;
+            state.failed = false;
         },
         [findMusicDetailsByIdThunk.fulfilled]: (state, action) => {
             state.musicDetailsLoading = false;

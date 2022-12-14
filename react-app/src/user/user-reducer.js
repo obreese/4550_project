@@ -34,7 +34,7 @@ const userReducer = createSlice({
         },
         [findUserByIdThunk.pending]: (state, action) => {
             state.loading = true
-            state.failed = true
+            state.failed = false
         },
         [findUserByIdThunk.rejected]: (state, action) => {
             state.failed = true
