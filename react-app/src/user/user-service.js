@@ -12,6 +12,9 @@ export const findUserById = async (uid) => {
 }
 
 export const register = async (user) => {
+    if (user.isAdmin) {
+        user.killCount = 0
+    }
     const response = await api.post(`${BASE_API_URL}/register`, user)
     const newUser = response.data
     return newUser

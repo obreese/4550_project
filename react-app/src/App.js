@@ -17,7 +17,6 @@ import searchResultsReducer from "./music/search-results-reducer";
 import {Provider} from "react-redux";
 import CurrentUser from "./user/current-user";
 
-
 const store = configureStore({
     reducer: {
         user: userReducer,

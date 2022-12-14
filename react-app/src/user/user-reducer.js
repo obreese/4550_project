@@ -26,7 +26,6 @@ const userReducer = createSlice({
         },
         [deleteUserThunk.fulfilled]: (state, action) => {
             state.failed = false
-            state.currentUser = null
         },
         [findUserByIdThunk.fulfilled]: (state, action) => {
             state.failed = false

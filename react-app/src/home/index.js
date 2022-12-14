@@ -32,7 +32,7 @@ const HomeComponent = () => {
     }
 
     useEffect(() => {
-        if (currentUser) {
+        if (currentUser && !currentUser.isAdmin) {
             getFollowingPosts();
         } else {
             getRecentPosts();

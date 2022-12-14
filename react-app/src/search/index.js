@@ -46,7 +46,7 @@ const SearchComponent = ({contentInitial = []}) => {
 
     return (
         <>
-            <input placeholder="Search People and Music"
+            <input placeholder="Search Music"
                 className="form-control rounded-pill ps-3"
                 onKeyDown={handleKeyDown}
                 type="search"/>
