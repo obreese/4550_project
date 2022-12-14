@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch} from "react-redux";
 import  "react-icons/bi/index";
 import ContentList from "../list";
-import { findAllMusic } from "../music/music-service"
-
-import {musics_json, posts_json, profile_items_json} from "../json_examples";
-import {createSearchParams, useLocation, useNavigate} from "react-router-dom";
+import {createSearchParams, useNavigate} from "react-router-dom";
 import { findAllMusicThunk } from "../music/search-results-thunk";
 import { FaSpinner } from "react-icons/fa";
 
@@ -40,9 +37,6 @@ const SearchComponent = ({contentInitial = []}) => {
             dispatch(findAllMusicThunk(searchTerm));
         }
     }
-
-    console.log(results)
-    console.log(searchTerm)
 
     return (
         <>

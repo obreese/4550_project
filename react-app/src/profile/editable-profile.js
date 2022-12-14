@@ -24,15 +24,12 @@ const EditableProfileComponent = ({ profileId, myProfile}) => {
     const handleSaveButton = () => {
         const newUser = {username, firstName, lastName, email, currentColor}
         const newUserId = '' + profile._id
-        if (newUser['username'] == "") newUser["username"] = profile.username
-        if (newUser['firstName'] == "") newUser["firstName"] = profile.firstName
-        if (newUser['lastName'] == "") newUser["lastName"] = profile.lastName
-        if (newUser['email'] == "") newUser["email"] = profile.email
-        if (newUser['currentColor'] == "") newUser["currentColor"] = profile.currentColor
+        if (newUser['username'] === "") newUser["username"] = profile.username
+        if (newUser['firstName'] === "") newUser["firstName"] = profile.firstName
+        if (newUser['lastName'] === "") newUser["lastName"] = profile.lastName
+        if (newUser['email'] === "") newUser["email"] = profile.email
+        if (newUser['currentColor'] === "") newUser["currentColor"] = profile.currentColor
         try {
-            console.log('id1: ' + newUserId)
-            console.log(newUser)
-
             dispatch(updateUserThunk({newUserId, newUser}))
         } catch (e) {
 

@@ -70,7 +70,6 @@ const UsersController = (app) => {
     }
 
     const findUserById = async (req, res) => {
-        console.log("We Finding")
         try {
             const uid = req.params.uid
             const user = await userDao.findUserById(uid)
@@ -85,7 +84,6 @@ const UsersController = (app) => {
 
             res.sendStatus(404)
         } catch {
-            console.log("No User Man")
             res.sendStatus(404)
         }
     }

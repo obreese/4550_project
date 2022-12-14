@@ -5,12 +5,7 @@ import {renderIcon} from "./music-icon";
 import {Link} from "react-router-dom";
 
 const MusicLinkItem = ({music}) => {
-
-    console.log(music)
-
     return (
-
-
             <Link to={"/details?musicId=" + music._id + "&type=" + music.music_type} className="music-item p-2 rounded text-decoration-none">
                 <div className="row">
                 <div className="col pr-5 d-inline-flex align-items-center">
