@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PostItem from "../posts/post-item";
 import MusicItem from "../music/music-item";
 import ProfileItem from "../profile/profile-item"
@@ -18,6 +18,7 @@ const ContentList = ({arr = [], editablePosts = false}) => {
                 return <></>
         }
     }
+
     return(
         <ul className="pt-3 list-group">
             {arr.map(item => render(item))}

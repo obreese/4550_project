@@ -23,6 +23,7 @@ const MusicDetailedComponent = () => {
 
     const getPosts = async (music_id) => {
         const newPosts = await findPostsByMusicId(music_id);
+        newPosts.sort((post1, post2) => (post1.time < post2.time) ? 1 : -1)
         setPosts(newPosts);
     }
 

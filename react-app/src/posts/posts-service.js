@@ -9,6 +9,17 @@ export const createPost = async (post) => {
     return response.data
 }
 
+export const updatePost = async (postData) => {
+    const response = await api.put(`${POST_API_URL}/${postData["newPostId"]}`, postData["newPost"])
+    return response.data
+}
+
+export const deletePost = async (pid) => {
+    const response = await api.delete(`${POST_API_URL}/${pid}`)
+    const post = response.data
+    return post
+}
+
 export const findAllPosts = async (pid) => {
     const response = await api.get(`${POST_API_URL}`)
     const posts = response.data

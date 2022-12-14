@@ -13,6 +13,7 @@ const ProfileStats = ({user, editable}) => {
 
     const getStats = async () => {
         const newPosts = await Promise.all(Array.from(user.posts.map((pid) => findPostById(pid))))
+        newPosts.sort((post1, post2) => (post1.time < post2.time) ? 1 : -1)
         setPosts(newPosts);
 
         const newFollowers = await Promise.all(Array.from(user.followers.map((uid) => findUserById(uid))))
@@ -24,7 +25,7 @@ const ProfileStats = ({user, editable}) => {
 
     useEffect(() => {
         getStats();
-    }, []);
+    }, [user]);
 
     const setCurrentListTypeToPosts = () => {
         setCurrentListType('posts');
@@ -52,7 +53,7 @@ const ProfileStats = ({user, editable}) => {
                           onClick={setCurrentListTypeToFollowing}>{user.following.length} Following</Link>
                 </li>
             </ul>
-            <ContentList arr={currentListType === 'posts' ? posts : currentListType === 'followers' ? followers : following} editablePosts={editable}/>
+        <ContentList arr={currentListType === 'posts' ? posts : currentListType === 'followers' ? followers : following} editablePosts={editable}/>
         </>
     );
 };

@@ -7,8 +7,24 @@ const PostsController = (app) => {
         res.json(actualPost)
     }
 
-    const updatePost = () => {}
-    const deletePost = () => {}
+    const updatePost = async (req, res) => {
+        const pid = req.params.pid;
+        const post = req.body;
+        const updatedPost = await postsDao.updatePost(pid, post);
+        req.session['currentPost'] = updatedPost;
+        res.json(updatePost)
+        return
+    }
+    const deletePost = async (req, res) => {
+        const pid = req.params.pid;
+        const post = await postsDao.findPostById(pid)
+        if (post) {
+            const deletedPost = await postsDao.deletePost(pid)
+            res.json(deletedPost)
+            return
+        }
+        res.sendStatus(404)
+    }
     
     const findAllPosts = async (req, res) => {
         let posts = await postsDao.findAllPosts()
