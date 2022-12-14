@@ -3,6 +3,8 @@ import ProfileStats from "./profile-stats";
 import ProfileColorDropdown from "./profile-colors";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteUserThunk, findUserByIdThunk, logoutThunk, updateUserThunk} from "../user/user-thunk";
+import { findUserById } from "../user/user-service";
+import { deletePost } from "../posts/posts-service";
 
 const EditableProfileComponent = ({ profileId, myProfile}) => {
 
@@ -37,9 +39,9 @@ const EditableProfileComponent = ({ profileId, myProfile}) => {
         }
     }
 
-    const handleDeleteButton = () => {
+    const handleDeleteButton = async () => {
         try {
-            dispatch(deleteUserThunk(profile._id))
+            // dispatch(deleteUserThunk(profile._id))
             if (myProfile) {
                 dispatch(logoutThunk())
             } else {
@@ -49,6 +51,26 @@ const EditableProfileComponent = ({ profileId, myProfile}) => {
                 newKillCount.killCount += 1
                 dispatch(updateUserThunk({newUserId: currentUserId, newUser: newKillCount}))
             }
+            const profile_followers = await Promise.all(profile.followers.map((follower_id) => findUserById(follower_id)));
+            const profile_following = await Promise.all(profile.following.map((following_id) => findUserById(following_id)));
+
+            profile_followers.map((follower) => {
+                const newFollowing = follower.following.filter((f) => f !== profileId);
+                const newUser = { following: newFollowing };
+                dispatch(updateUserThunk({newUserId: follower._id, newUser}));
+                return follower;
+            })
+
+            profile_following.map((following) => {
+                const newFollowers = following.followers.filter((f) => f !== profileId);
+                const newUser = { followers: newFollowers };
+                dispatch(updateUserThunk({newUserId: following._id, newUser}));
+                return following;
+            })
+
+            await Promise.all(profile.posts.map((post_id) => deletePost(post_id)))
+
+            dispatch(deleteUserThunk(profile._id));
         } catch (e) {
 
         }
