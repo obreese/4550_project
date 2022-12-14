@@ -5,9 +5,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {deleteUserThunk, findUserByIdThunk, logoutThunk, updateUserThunk} from "../user/user-thunk";
 import { findUserById } from "../user/user-service";
 import { deletePost } from "../posts/posts-service";
+import { useNavigate } from "react-router-dom";
 
 const EditableProfileComponent = ({ profileId, myProfile}) => {
-
     const {profile, loading} = useSelector((state) => state.user)
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -15,6 +15,8 @@ const EditableProfileComponent = ({ profileId, myProfile}) => {
     const [username, setUsername] = useState('');
     const [currentColor, setCurrentColor] = useState('');
     const dispatch = useDispatch()
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(findUserByIdThunk(profileId))
@@ -67,6 +69,8 @@ const EditableProfileComponent = ({ profileId, myProfile}) => {
             await Promise.all(profile.posts.map((post_id) => deletePost(post_id)))
 
             dispatch(deleteUserThunk(profile._id));
+
+            navigate('/home');
         } catch (e) {
 
         }

@@ -9,12 +9,12 @@ import { findAllPosts, findPostsByUserId } from "../posts/posts-service";
 const HomeComponent = () => {
     const navigate = useNavigate()
 
-    const { currentUser } = useSelector((state) => state.user);
+    const { currentUser, profile } = useSelector((state) => state.user);
 
     const [posts, setPosts] = useState([]);
 
     const getFollowingPosts = async () => {
-        const newPosts = await Promise.all(Array.from(currentUser.following.map((uid) => findPostsByUserId(uid))))
+        const newPosts = await Promise.all(Array.from(profile.following.map((uid) => findPostsByUserId(uid))))
         newPosts.sort((post1, post2) => (post1.time < post2.time) ? 1 : -1)
 
         if (newPosts) {
@@ -32,7 +32,7 @@ const HomeComponent = () => {
     }
 
     useEffect(() => {
-        if (currentUser && !currentUser.isAdmin) {
+        if (currentUser && profile && !profile.isAdmin) {
             getFollowingPosts();
         } else {
             getRecentPosts();

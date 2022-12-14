@@ -6,16 +6,11 @@ import {createSearchParams, useNavigate} from "react-router-dom";
 import { findAllMusicThunk } from "../music/search-results-thunk";
 import { FaSpinner } from "react-icons/fa";
 
-// TODO get posts from user
-
 const SearchComponent = ({contentInitial = []}) => {
     const dispatch = useDispatch()
 
     const { results, resultsLoading } = useSelector((state) => state.searchResults);
-    // let search = useLocation().pathname.split("/").indexOf("search") > -1
-    // let arr_e = musics_json.concat(profile_items_json)
     const navigate = useNavigate()
-    // const [searchInput, setSearchInput] = useState("");
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
