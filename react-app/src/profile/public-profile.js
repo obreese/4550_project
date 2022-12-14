@@ -14,12 +14,8 @@ const PublicProfileComponent = ({ profileId }) => {
     }, [location])
 
     const handleFollow = () => {
-        console.log(currentUser.following)
-        console.log(profile.followers)
         const newCurrentFollowing = [...currentUser.following, profileId]
         const newProfileFollowers = [...profile.followers, currentUser._id]
-        console.log(newCurrentFollowing)
-        console.log(newProfileFollowers)
         dispatch(updateUserThunk({newUserId: currentUser._id, newUser: {following: newCurrentFollowing}}))
         dispatch(updateUserThunk({newUserId: profile._id, newUser: {followers: newProfileFollowers}}))
     }

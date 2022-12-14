@@ -14,10 +14,7 @@ const UsersController = (app) => {
 
         const uid = req.params.uid;
         const user = req.body;
-        console.log(uid)
-        console.log(user)
         const updatedUser = await userDao.updateUser(uid, user);
-        console.log(updatedUser)
         req.session['currentUser'] = updatedUser;
         res.json(updatedUser)
         return
