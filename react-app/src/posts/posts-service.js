@@ -10,4 +10,14 @@ export const findPostById = async (pid) => {
     return post
 }
 
+export const findPostsByMusicId = async (music_id) => {
+    const response = await api.get(`${POST_API_URL}/byMusicId/${music_id}`)
+    const post = response.data
+    return post
+}
 
+export const findPostsByUserId = async (uid) => {
+    const response = await api.get(`${POST_API_URL}/byUserId/${uid}`)
+    const post = response.data
+    return post
+}

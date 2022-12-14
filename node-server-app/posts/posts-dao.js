@@ -10,5 +10,11 @@ export const updatePost = async (pid, postUpdates) =>
     await postsModel.updateOne({_id: pid},
         {$set: postUpdates})
 
-export const findPostById = (pid) =>
-    postsModel.findById(pid)
+export const findPostById = async (pid) =>
+    await postsModel.findById(pid)
+
+export const findPostsByMusicId = async (music_id) =>
+    await postsModel.find({'music.music_id': music_id})
+
+export const findPostsByUserId = async (uid) =>
+    await postsModel.find({'user_id': uid})

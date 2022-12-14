@@ -2,31 +2,27 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import  "react-icons/bi/index";
 import ContentList from "../list";
-import {musics_json, posts_json, profile_items_json} from "../json_examples";
-import {createSearchParams, useLocation, useNavigate} from "react-router-dom";
+import {createSearchParams, useNavigate} from "react-router-dom";
 import './index.css';
-import { findPostById } from "../posts/posts-service";
+import { findPostsByUserId } from "../posts/posts-service";
 
-const HomeComponent = ({contentInitial = []}) => {
+const HomeComponent = () => {
     const navigate = useNavigate()
 
+    const { currentUser } = useSelector((state) => state.user);
 
-    let { currentUser } = useSelector((state) => state.user);
-    currentUser = {
-        ...currentUser,
-        posts: ['6398e7e0767cc1b947008624'],
-    }
-
-    const [posts, setPosts] = useState(undefined);
+    const [posts, setPosts] = useState([]);
 
     const getPosts = async () => {
-        const newPosts = await Promise.all(Array.from(currentUser.posts.map((pid) => findPostById(pid))))
+        const newPosts = await Promise.all(Array.from(currentUser.following.map((uid) => findPostsByUserId(uid))))
 
-        setPosts(newPosts);
+        setPosts(newPosts.flat());
     }
 
     useEffect(() => {
-        getPosts();
+        if (currentUser) {
+            getPosts();
+        }
     }, []);
 
     const handleKeyDown = (event) => {

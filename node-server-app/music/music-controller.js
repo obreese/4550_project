@@ -8,7 +8,7 @@ const _formatMusicDataList = (songsDataList, albumsDataList, artistsDataList) =>
     return {
         type: "music",
         _id: musicData.id,
-        music_type: "song",
+        music_type: "track",
         song: musicData.name,
         album: musicData.album.name,
         artist: musicData.artists.map(artist => artist.name).join(', '),

@@ -24,7 +24,23 @@ const PostsController = (app) => {
         res.sendStatus(404)
     }
 
+    const findPostsByMusicId = async (req, res) => {
+        const music_id = req.params.music_id
+        let posts = await postsDao.findPostsByMusicId(music_id)          
+        res.json(posts)
+        return
+    }
+
+    const findPostsByUserId = async (req, res) => {
+        const uid = req.params.uid
+        let posts = await postsDao.findPostsByUserId(uid)          
+        res.json(posts)
+        return
+    }
+
     app.get('/posts/:pid', findPostById)
+    app.get('/posts/byMusicId/:music_id', findPostsByMusicId)
+    app.get('/posts/byUserId/:uid', findPostsByUserId)
     app.post('/posts', createPost)
     app.put('/posts/:pid', updatePost)
     app.delete('/posts/:pid', deletePost)
